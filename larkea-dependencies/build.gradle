@@ -1,0 +1,55 @@
+buildscript {
+	repositories {
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
+	}
+}
+
+apply plugin: "io.spring.dependency-management"
+apply from: "${rootProject.projectDir}/gradle/publish-bom.gradle"
+
+dependencyManagement {
+	dependencies {
+		// Pete
+		dependency "com.larkea.boot:larkea-core:${version}"
+		dependency "com.larkea.boot:larkea-boot:${version}"
+		dependency "com.larkea.boot:larkea-log4j2:${version}"
+		dependency "com.larkea.boot:larkea-mybatis:${version}"
+		dependency "com.larkea.boot:larkea-mybatis-generator:${version}"
+		dependency "com.larkea.boot:larkea-swagger:${version}"
+
+		// Third Party
+		dependency "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+		dependency "com.baomidou:mybatis-plus-generator:$mybatisPlusVersion"
+		dependency "com.github.xiaoymin:knife4j-spring-boot-starter:${knife4jVersion}"
+		dependency "com.google.code.findbugs:jsr305:${findbugsVersion}"
+		dependency "com.google.guava:guava:${guavaVersion}"
+		dependency "com.lmax:disruptor:${disruptorVersion}"
+		dependency "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+		dependency "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+		dependency "commons-codec:commons-codec:${commonsCodecVersion}"
+		dependency "dom4j:dom4j:${dom4jVersion}"
+		dependency "io.github.openfeign.form:feign-form:${feignFormVersion}"
+		dependency "io.github.openfeign:feign-core:${feignVersion}"
+		dependency "io.github.openfeign:feign-jackson:${feignVersion}"
+		dependency "io.github.openfeign:feign-slf4j:${feignVersion}"
+		dependency "io.netty:netty-all:${nettyVersion}"
+		dependency "io.netty:netty-codec-mqtt:${nettyVersion}"
+		dependency "io.springfox:springfox-bean-validators:${swaggerVersion}"
+		dependency "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+		dependency "io.springfox:springfox-swagger2:${swaggerVersion}"
+		dependency "org.apache.commons:commons-collections4:${commonsCollections4Version}"
+		dependency "org.apache.commons:commons-csv:${commonsCsvVersion}"
+		dependency "org.apache.commons:commons-lang3:${commonsLang3Version}"
+		dependency "org.eclipse.paho:org.eclipse.paho.client.mqttv3:${pahoMqttJavaVersion}"
+		dependency "org.jsoup:jsoup:${jsoupVersion}"
+		dependency "org.junit.jupiter:junit-jupiter:${junitVersion}"
+		dependency "org.mariuszgromada.math:MathParser.org-mXparser:${mXparserVersion}"
+		dependency "org.projectlombok:lombok:${lombokVersion}"
+		dependency "org.redisson:redisson:${redissonVersion}"
+	}
+}

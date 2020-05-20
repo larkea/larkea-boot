@@ -1,0 +1,20 @@
+larkea
+  boot:
+    mybatis:
+      generator:
+        global:
+          author: wangle
+          outputDir: mbgen/src/main/java
+        package:
+          parent: com.huitongio.delos
+        dataSource:
+          url: jdbc:mysql://mysql.test.pivaiot.com:3306/lark?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+          driverName: com.mysql.jdbc.Driver
+          username: root
+          password: Let_Me_In
+        strategy:
+          tablePrefix:
+            - htk_
+            - lk_
+          include:
+            - lk_product

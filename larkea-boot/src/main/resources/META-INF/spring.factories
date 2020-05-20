@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+PeteContextAutoConfiguration,\
+PeteConverterAutoConfiguration,\
+PeteErrorAutoConfiguration,\
+PeteTaskExecutorAutoConfiguration,\
+ExceptionHandlerAutoConfiguration,\
+RequestLogAutoConfiguration

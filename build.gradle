@@ -1,0 +1,82 @@
+ext {
+	bitwalkerUserAgentUtilsVersion = '1.21'
+	commonsCodecVersion = '1.13'
+	commonsCollections4Version = '4.4'
+	commonsCsvVersion = '1.7'
+	commonsLang3Version = '3.9'
+	disruptorVersion = '3.4.2'
+	dom4jVersion = '1.6.1'
+	feignFormVersion = '3.8.0'
+	feignVersion = '10.10.1'
+	findbugsVersion = "3.0.2"
+	guavaVersion = '20.0'
+	jacksonVersion = "2.10.1"
+	javaVersion = JavaVersion.VERSION_1_8
+	jodaTimeVersion = '2.9.9'
+	jsoupVersion = "1.12.1"
+	junitVersion = '5.4.2'
+	knife4jVersion = "2.0.2"
+	lombokVersion = "1.18.10"
+	mXparserVersion = '4.3.3'
+	mybatisPlusVersion = "3.3.0"
+	nettyVersion = "4.1.39.Final"
+	okhttpVersion = "3.14.2"
+	pahoMqttJavaVersion = '1.2.0'
+	redissonVersion = "3.11.2"
+	servletApiVersion = '4.0.1'
+	slf4jApiVersion = '1.7.25'
+	springBootVersion = "2.2.1.RELEASE"
+	springVersion = '5.0.10.RELEASE'
+	swaggerVersion = "2.9.2"
+	validationApiVersion = "2.0.1.Final"
+}
+
+configure(subprojects) {
+	group = "com.larkea.boot"
+	version = rootProject.file('VERSION').text.trim()
+	apply plugin: 'maven-publish'
+}
+
+configure(subprojects - project(":larkea-dependencies")) {
+	apply plugin: "java-library"
+	apply from: "${rootProject.projectDir}/gradle/publish-jar.gradle"
+	apply from: "${rootProject.projectDir}/gradle/quality.gradle"
+	sourceCompatibility = "${javaVersion}"
+	targetCompatibility = "${javaVersion}"
+	tasks.withType(JavaCompile) {
+		options.encoding = "UTF-8"
+		options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+	}
+
+	tasks.withType(Test) {
+		useJUnitPlatform()
+	}
+
+	repositories {
+		mavenLocal()
+		maven { url "https://maven.aliyun.com/repository/public" }
+		maven { url "https://maven.aliyun.com/repository/spring" }
+		maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+		maven { url "https://repo.spring.io/libs-release" }
+		maven { url "https://repo.spring.io/milestone" }
+		mavenCentral()
+	}
+
+	dependencies {
+		// import BOM.
+		annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+		implementation platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+		implementation "org.slf4j:slf4j-api"
+		implementation "javax.servlet:javax.servlet-api"
+		implementation "org.springframework:spring-web"
+		implementation "org.projectlombok:lombok:$lombokVersion"
+		implementation "com.google.code.findbugs:jsr305:$findbugsVersion"
+		testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+		testImplementation "com.google.code.findbugs:jsr305:$findbugsVersion"
+		testImplementation "org.projectlombok:lombok:$lombokVersion"
+		testImplementation "org.springframework:spring-test"
+		testImplementation "junit:junit"
+	}
+
+	compileJava.dependsOn(processResources)
+}
