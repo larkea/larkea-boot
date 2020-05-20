@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-MybatisAutoConfiguration
+com.larkea.boot.mybatis.MybatisAutoConfiguration

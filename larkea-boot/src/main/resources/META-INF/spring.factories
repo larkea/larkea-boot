@@ -1,7 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-PeteContextAutoConfiguration,\
-PeteConverterAutoConfiguration,\
-PeteErrorAutoConfiguration,\
-PeteTaskExecutorAutoConfiguration,\
-ExceptionHandlerAutoConfiguration,\
-RequestLogAutoConfiguration
+com.larkea.boot.boot.config.LarkeaBootContextAutoConfiguration,\
+com.larkea.boot.boot.config.LarkeaBootConverterAutoConfiguration,\
+com.larkea.boot.boot.config.LarkeaBootErrorAutoConfiguration,\
+com.larkea.boot.boot.config.LarkeaBootTaskExecutorAutoConfiguration,\
+com.larkea.boot.boot.servlet.config.ExceptionHandlerAutoConfiguration,\
+com.larkea.boot.boot.servlet.config.RequestLogAutoConfiguration

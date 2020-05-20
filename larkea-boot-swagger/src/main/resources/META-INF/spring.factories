@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-SwaggerAutoConfiguration
+com.larkea.boot.swagger.SwaggerAutoConfiguration
