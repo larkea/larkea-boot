@@ -1,0 +1,5 @@
+dependencies {
+	api project(":larkea-boot-core")
+	api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+	api "org.springframework.boot:spring-boot-starter-jdbc"
+}
