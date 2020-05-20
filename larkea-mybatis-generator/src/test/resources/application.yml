@@ -1,4 +1,4 @@
-larkea
+larkea:
   boot:
     mybatis:
       generator:
