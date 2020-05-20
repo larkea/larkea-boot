@@ -35,7 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Configuration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@ConditionalOnProperty(value = "pete.request.log", havingValue = "true")
+@ConditionalOnProperty(value = "larkea.boot.request.log", havingValue = "true")
 @RequiredArgsConstructor
 @Aspect
 @Slf4j
@@ -44,7 +44,7 @@ public class RequestLogAutoConfiguration {
 	private final ObjectMapper objectMapper;
 
 	@Around(
-			"execution(!static com.huitongio.pete.core.result.Result *(..)) && " +
+			"execution(!static com.larkea.boot.core.result.Result *(..)) && " +
 					"(@within(org.springframework.stereotype.Controller) || " +
 					"@within(org.springframework.web.bind.annotation.RestController))"
 	)

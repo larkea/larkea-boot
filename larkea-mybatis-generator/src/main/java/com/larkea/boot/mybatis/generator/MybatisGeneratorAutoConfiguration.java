@@ -49,7 +49,6 @@ public class MybatisGeneratorAutoConfiguration {
 	@ConfigurationProperties(prefix = PREFIX + "package")
 	PackageConfig packageConfig() {
 		PackageConfig packageConfig = new PackageConfig();
-		//packageConfig.setParent("com.huitongio.delos");
 		packageConfig.setEntity("dao.entity");
 		packageConfig.setService("dao");
 		packageConfig.setServiceImpl("dao.impl");

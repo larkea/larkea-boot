@@ -6,7 +6,7 @@ larkea:
           author: wangle
           outputDir: mbgen/src/main/java
         package:
-          parent: com.huitongio.delos
+          parent: com.larkea.server
         dataSource:
           url: jdbc:mysql://mysql.test.pivaiot.com:3306/lark?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
           driverName: com.mysql.jdbc.Driver
