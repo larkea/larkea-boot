@@ -37,7 +37,7 @@ configure(subprojects) {
 	apply plugin: 'maven-publish'
 }
 
-configure(subprojects - project(":larkea-dependencies")) {
+configure(subprojects - project(":larkea-boot-dependencies")) {
 	apply plugin: "java-library"
 	apply from: "${rootProject.projectDir}/gradle/publish-jar.gradle"
 	apply from: "${rootProject.projectDir}/gradle/quality.gradle"
