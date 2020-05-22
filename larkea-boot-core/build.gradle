@@ -10,6 +10,7 @@ dependencies {
 	api "commons-codec:commons-codec:${commonsCodecVersion}"
 	api "javax.servlet:javax.servlet-api:${servletApiVersion}"
 	api "javax.validation:validation-api:${validationApiVersion}"
+    api "org.hibernate.validator:hibernate-validator"
 
 	testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
 }
