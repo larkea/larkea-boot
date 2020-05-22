@@ -25,8 +25,7 @@ ext {
 	redissonVersion = "3.11.2"
 	servletApiVersion = '4.0.1'
 	slf4jApiVersion = '1.7.25'
-	springBootVersion = "2.2.1.RELEASE"
-	springVersion = '5.0.10.RELEASE'
+	springBootVersion = "2.3.0.RELEASE"
 	swaggerVersion = "2.9.2"
 	validationApiVersion = "2.0.1.Final"
 }

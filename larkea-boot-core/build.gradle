@@ -1,11 +1,9 @@
 dependencies {
-	api "org.springframework:spring-beans:${springVersion}"
-	//api "org.springframework.boot:spring-boot-starter-json"
+	api "org.springframework:spring-beans"
 	api "com.fasterxml.jackson.core:jackson-databind"
 	api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 	api "io.springfox:springfox-swagger2:${swaggerVersion}"
 	api "org.apache.commons:commons-lang3:${commonsLang3Version}"
-	//api "org.apache.commons:commons-csv:${commonsCsvVersion}"
 	api "eu.bitwalker:UserAgentUtils:${bitwalkerUserAgentUtilsVersion}"
 	api "org.slf4j:slf4j-api:${slf4jApiVersion}"
 	api "dom4j:dom4j:${dom4jVersion}"
