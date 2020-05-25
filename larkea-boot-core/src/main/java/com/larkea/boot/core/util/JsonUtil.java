@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,10 +42,9 @@ import lombok.extern.slf4j.Slf4j;
  * A json util based on jackson.
  */
 @Slf4j
-@UtilityClass
 public class JsonUtil {
 
-	private static ObjectMapper mapper = new ObjectMapper();
+	private static final ObjectMapper mapper = new ObjectMapper();
 
 	static {
 		SimpleModule module = new SimpleModule(Version.unknownVersion());
@@ -167,6 +167,34 @@ public class JsonUtil {
 		}
 	}
 
+    /**
+     *  处理 JavaType.
+     */
+	public static <T> T fromJson(String json, JavaType type) {
+        try {
+            return mapper.readValue(json, type);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     *  指定泛型反序列化.
+     */
+    public static <T> T fromJson(String json, Class<?> parametrized, Class<?>... parameterClasses) {
+        JavaType type = constructParametricType(parametrized, parameterClasses);
+        return fromJson(json, type);
+    }
+
+
+    /**
+     *  获取泛型.
+     */
+    public static JavaType constructParametricType(Class<?> parametrized, Class<?>... parameterClasses) {
+	    return mapper.getTypeFactory().constructParametricType(parametrized, parameterClasses);
+    }
+
 	/**
 	 * Create a new ObjectMapper.
 	 *
@@ -175,4 +203,11 @@ public class JsonUtil {
 	public static ObjectMapper copy() {
 		return mapper.copy();
 	}
+
+	public static ObjectMapper mapper() {
+	    return mapper;
+    }
+
+    private JsonUtil() {
+    }
 }
