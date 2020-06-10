@@ -9,11 +9,11 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class LoginNameUtil {
 
-	public static LoginNameEnum decide(String loginName) {
+	public static LoginNameType decide(String loginName) {
 		int digitalCount = 0;
 		for (char c : loginName.toCharArray()) {
 			if (c == '@') {
-				return LoginNameEnum.EMAIL;
+				return LoginNameType.EMAIL;
 			}
 
 			if (c >= '0' && c <= '9') {
@@ -22,13 +22,13 @@ public class LoginNameUtil {
 		}
 
 		if (digitalCount == loginName.length()) {
-			return LoginNameEnum.MOBILE;
+			return LoginNameType.MOBILE;
 		}
 
-		return LoginNameEnum.USERNAME;
+		return LoginNameType.USERNAME;
 	}
 
-	public enum LoginNameEnum {
+	public enum LoginNameType {
 		MOBILE, EMAIL, USERNAME
 	}
 }
