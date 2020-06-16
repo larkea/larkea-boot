@@ -13,15 +13,15 @@ import com.larkea.boot.core.validator.TelephoneValidator;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.PARAMETER })
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Constraint(validatedBy = TelephoneValidator.class)
 public @interface Telephone {
 
-	String[] value() default {};
+    String[] value() default {};
 
-	String message() default "Telephone value is wrong";
+    String message() default "Telephone value is wrong";
 
-	Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

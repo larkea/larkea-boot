@@ -1,7 +1,7 @@
 # http://editorconfig.org
-root=true
+root = true
 
-[*.{groovy,java,kt,xml}]
+[*.{groovy, java, kt, xml}]
 indent_style = tab
 indent_size = 4
 continuation_indent_size = 8

@@ -30,66 +30,65 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
 /**
- * Swagger 配置
+ * Swagger
  */
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
-@Import({ SwaggerProperties.class })
-@ConditionalOnClass({ Docket.class, Swagger2DocumentationConfiguration.class })
+@Import({SwaggerProperties.class})
+@ConditionalOnClass({Docket.class, Swagger2DocumentationConfiguration.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @ConditionalOnProperty(value = "larkea.boot.swagger.enabled", havingValue = "true", matchIfMissing = true)
 @RequiredArgsConstructor
 public class SwaggerAutoConfiguration {
 
-	private final Environment environment;
+    private final Environment environment;
 
-	private ServletContext servletContext;
+    private ServletContext servletContext;
 
-	@Bean
-	public Docket docket(SwaggerProperties properties) {
-		String appName = environment.getProperty("spring.application.name");
-		Predicate<RequestHandler> selector;
+    @Bean
+    public Docket docket(SwaggerProperties properties) {
+        String appName = environment.getProperty("spring.application.name");
+        Predicate<RequestHandler> selector;
 
-		if (properties.isAutoScan()) {
-			selector = RequestHandlerSelectors.withClassAnnotation(Api.class);
-		}
-		else {
-			Assert.notNull(properties.getBasePackage(), "Error: larkea.boot.swagger.basePackage is null");
-			selector = RequestHandlerSelectors.basePackage(properties.getBasePackage());
-		}
+        if (properties.isAutoScan()) {
+            selector = RequestHandlerSelectors.withClassAnnotation(Api.class);
+        } else {
+            Assert.notNull(properties.getBasePackage(), "Error: larkea.boot.swagger.basePackage is null");
+            selector = RequestHandlerSelectors.basePackage(properties.getBasePackage());
+        }
 
-		PathProvider pathProvider = new RelativePathProvider(servletContext) {
-			@Override
-			public String getApplicationBasePath() {
-				return properties.getBasePath();
-			}
-		};
+        PathProvider pathProvider = new RelativePathProvider(servletContext) {
+            @Override
+            public String getApplicationBasePath() {
+                return properties.getBasePath();
+            }
+        };
 
-		return new Docket(DocumentationType.SWAGGER_2)
-				.useDefaultResponseMessages(false)
-				.groupName(properties.getGroupName())
-				.host(properties.getHost())
-				.pathProvider(pathProvider)
-				.apiInfo(apiInfo(appName, properties))
-				.select()
-				.apis(selector)
-				.paths(PathSelectors.any())
-				.build();
-	}
+        return new Docket(DocumentationType.SWAGGER_2)
+                .useDefaultResponseMessages(false)
+                .groupName(properties.getGroupName())
+                .host(properties.getHost())
+                .pathProvider(pathProvider)
+                .apiInfo(apiInfo(appName, properties))
+                .select()
+                .apis(selector)
+                .paths(PathSelectors.any())
+                .build();
+    }
 
-	private ApiInfo apiInfo(String appName, SwaggerProperties properties) {
-		String title = Optional.ofNullable(properties.getTitle())
-				.orElse(appName);
-		String description = Optional.ofNullable(properties.getDescription())
-				.orElse(appName);
-		return new ApiInfoBuilder()
-				.title(title)
-				.description(description)
-				.version(properties.getVersion())
-				.contact(new Contact(properties.getContactName(), properties.getContactUrl(),
-						properties.getContactEmail()))
-				.build();
-	}
+    private ApiInfo apiInfo(String appName, SwaggerProperties properties) {
+        String title = Optional.ofNullable(properties.getTitle())
+                .orElse(appName);
+        String description = Optional.ofNullable(properties.getDescription())
+                .orElse(appName);
+        return new ApiInfoBuilder()
+                .title(title)
+                .description(description)
+                .version(properties.getVersion())
+                .contact(new Contact(properties.getContactName(), properties.getContactUrl(),
+                        properties.getContactEmail()))
+                .build();
+    }
 
 }

@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public abstract class BaseIdData implements BaseData {
 
-	private final static long serialVersionUID = -1741347060973497629L;
+    private final static long serialVersionUID = -1741347060973497629L;
 
-	private Long id;
+    private Long id;
 
 }

@@ -10,86 +10,66 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 分页查询参数
+ * Page query parameter data structure
  */
-@ApiModel(description = "分页查询参数")
+@ApiModel(description = "Page query parameter data structure")
 @Data
 public class PageQueryParam implements QueryParam {
 
-	private static final long serialVersionUID = 5712709049320944991L;
+    @ApiModelProperty(value = "Current offset", notes = "Default value:0", example = "0")
+    private Integer offset = 0;
 
-	/**
-	 * 当前页
-	 */
-	@ApiModelProperty(value = "当前记录数", notes = "默认值:0", example = "0")
-	private Integer offset = 0;
+    @ApiModelProperty(value = "Current page size", notes = "Default value:10", example = "10")
+    private Integer limit = 10;
 
-	/**
-	 * 每页多少条数据
-	 */
-	@ApiModelProperty(value = "每页多少条数据", notes = "默认值:10", example = "10")
-	private Integer limit = 10;
+    @ApiModelProperty(value = "Fields for Asc")
+    private String[] ascs = {};
 
-	/**
-	 * 升序字段
-	 */
-	@ApiModelProperty(value = "升序字段")
-	private String[] ascs = {};
+    @ApiModelProperty(value = "Fields for Desc")
+    private String[] descs = {};
 
-	/**
-	 * 降序字段
-	 */
-	@ApiModelProperty(value = "降序字段")
-	private String[] descs = {};
+    @ApiModelProperty(value = "Query total count, Default value is true", example = "true")
+    private boolean searchCount = true;
 
-	/**
-	 * 是否查询总数
-	 */
-	@ApiModelProperty(value = "是否查询总数, 默认是", example = "1")
-	private boolean searchCount = true;
+    public boolean hasAscOrDesc() {
+        return !hasNoAscOrDesc();
+    }
 
-	/**
-	 * 是否有排序的字段.
-	 */
-	public boolean hasAscOrDesc() {
-		return !hasNoAscOrDesc();
-	}
+    /**
+     * Whether has failed to sort.
+     */
+    public boolean hasNoAscOrDesc() {
+        return this.ascs.length == 0 && this.descs.length == 0;
+    }
 
-	/**
-	 * 是否没有排序的字段.
-	 */
-	public boolean hasNoAscOrDesc() {
-		return this.ascs.length == 0 && this.descs.length == 0;
-	}
+    /**
+     * Add fields for Order By.
+     */
+    public String[] extendsOrderBy(String[] origin, String... orderBy) {
+        List<String> orderByList = Optional.ofNullable(origin)
+                .map(Lists::newArrayList)
+                .orElse(Lists.newArrayList());
 
-	/**
-	 * 添加 Order By 字段.
-	 */
-	public String[] extendsOrderBy(String[] origin, String... orderBy) {
-		List<String> orderByList = Optional.ofNullable(origin)
-				.map(Lists::newArrayList)
-				.orElse(Lists.newArrayList());
+        if (orderBy != null && orderBy.length > 0) {
+            orderByList.addAll(Arrays.asList(orderBy));
+        }
 
-		if (orderBy != null && orderBy.length > 0) {
-			orderByList.addAll(Arrays.asList(orderBy));
-		}
+        return orderByList.toArray(new String[0]);
+    }
 
-		return orderByList.toArray(new String[0]);
-	}
+    /**
+     * Add asc Order By fields.
+     */
+    public String[] extendsAscs(String... orderBy) {
+        ascs = extendsOrderBy(ascs, orderBy);
+        return ascs;
+    }
 
-	/**
-	 * 添加升序 Order By 字段.
-	 */
-	public String[] extendsAscs(String... orderBy) {
-		ascs = extendsOrderBy(ascs, orderBy);
-		return ascs;
-	}
-
-	/**
-	 * 添加降序 Order By 字段.
-	 */
-	public String[] extendsDescs(String... orderBy) {
-		descs = extendsOrderBy(descs, orderBy);
-		return descs;
-	}
+    /**
+     * Add desc Order By fields.
+     */
+    public String[] extendsDescs(String... orderBy) {
+        descs = extendsOrderBy(descs, orderBy);
+        return descs;
+    }
 }

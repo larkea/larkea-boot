@@ -9,51 +9,52 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Sets;
-import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.BeansException;
 
-@UtilityClass
 public class BeanUtil extends BeanUtils {
 
-	public static String[] getNullPropertyNames(Object source) {
-		final BeanWrapper src = new BeanWrapperImpl(source);
-		PropertyDescriptor[] pds = src.getPropertyDescriptors();
+    private BeanUtil() {
+    }
 
-		Set<String> emptyNames = Sets.newHashSet();
-		for (PropertyDescriptor pd : pds) {
-			Object srcValue = src.getPropertyValue(pd.getName());
-			if (srcValue == null) {
-				emptyNames.add(pd.getName());
-			}
-		}
-		String[] result = new String[emptyNames.size()];
-		return emptyNames.toArray(result);
-	}
+    public static String[] getNullPropertyNames(Object source) {
+        final BeanWrapper src = new BeanWrapperImpl(source);
+        PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
-	public static void copyPropertiesIgnoreNull(Object source, Object target) throws BeansException {
-		String[] ignoreProperties = getNullPropertyNames(source);
-		copyProperties(source, target, ignoreProperties);
-	}
+        Set<String> emptyNames = Sets.newHashSet();
+        for (PropertyDescriptor pd : pds) {
+            Object srcValue = src.getPropertyValue(pd.getName());
+            if (srcValue == null) {
+                emptyNames.add(pd.getName());
+            }
+        }
+        String[] result = new String[emptyNames.size()];
+        return emptyNames.toArray(result);
+    }
 
-	public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier,
-			Function<S, T> converter) {
-		return sources.stream().map(source -> {
-			T target = targetSupplier.get();
-			copyProperties(source, target);
+    public static void copyPropertiesIgnoreNull(Object source, Object target) throws BeansException {
+        String[] ignoreProperties = getNullPropertyNames(source);
+        copyProperties(source, target, ignoreProperties);
+    }
 
-			if (Optional.ofNullable(converter).isPresent()) {
-				target = converter.apply(source);
-			}
+    public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier,
+                                          Function<S, T> converter) {
+        return sources.stream().map(source -> {
+            T target = targetSupplier.get();
+            copyProperties(source, target);
 
-			return target;
-		}).collect(Collectors.toList());
-	}
+            if (Optional.ofNullable(converter).isPresent()) {
+                target = converter.apply(source);
+            }
 
-	public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier) {
-		return copyList(sources, targetSupplier, null);
-	}
+            return target;
+        }).collect(Collectors.toList());
+    }
+
+    public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier) {
+        return copyList(sources, targetSupplier, null);
+    }
 
 }

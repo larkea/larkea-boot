@@ -2,8 +2,8 @@ package com.larkea.boot.core.data;
 
 public interface EnumData extends BaseData {
 
-	Integer getValue();
+    Integer getValue();
 
-	String getDescription();
+    String getDescription();
 
 }

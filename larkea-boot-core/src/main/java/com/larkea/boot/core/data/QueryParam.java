@@ -3,7 +3,7 @@ package com.larkea.boot.core.data;
 import java.io.Serializable;
 
 /**
- * 查询参数
+ * query parameter data structure
  */
 public interface QueryParam extends Serializable {
 

@@ -10,41 +10,39 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 分页结构.
+ * Page data structure.
  *
- * @param <T> 分页数组中的数据项类型
+ * @param <T> the generic type in page array.
  */
 @Data
-@ApiModel(description = "分页")
+@ApiModel(description = "Page")
 public class Page<T> implements BaseData {
 
-	// 总记录数　
-	@ApiModelProperty(value = "总记录数", required = true)
-	private Long total;
+    @ApiModelProperty(value = "Total records", required = true)
+    private Long total;
 
-	// 当前内容
-	@ApiModelProperty(value = "当前记录", required = true)
-	private List<T> rows;
+    @ApiModelProperty(value = "Current items", required = true)
+    private List<T> rows;
 
-	public Page() {
-		this(0L, Lists.newArrayList());
-	}
+    public Page() {
+        this(0L, Lists.newArrayList());
+    }
 
-	public Page(Long total, List<T> rows) {
-		this.total = total;
-		this.rows = rows;
-	}
+    public Page(Long total, List<T> rows) {
+        this.total = total;
+        this.rows = rows;
+    }
 
-	public static <T> Page craft(Long total, List<T> rows) {
-		return new Page<>(total, rows);
-	}
+    public static <T> Page craft(Long total, List<T> rows) {
+        return new Page<>(total, rows);
+    }
 
-	public static <T> Page<T> empty() {
-		return new Page<>();
-	}
+    public static <T> Page<T> empty() {
+        return new Page<>();
+    }
 
-	public <R> Page<R> map(Function<? super T, ? extends R> mapFunction) {
-		return new Page<>(this.total,
-				this.rows.stream().map(mapFunction).collect(Collectors.toList()));
-	}
+    public <R> Page<R> map(Function<? super T, ? extends R> mapFunction) {
+        return new Page<>(this.total,
+                this.rows.stream().map(mapFunction).collect(Collectors.toList()));
+    }
 }
