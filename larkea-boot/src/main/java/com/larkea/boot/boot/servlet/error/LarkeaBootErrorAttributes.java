@@ -3,11 +3,10 @@ package com.larkea.boot.boot.servlet.error;
 import java.util.Map;
 import java.util.Optional;
 
+import com.google.common.collect.Maps;
 import com.larkea.boot.core.exception.SystemException;
 import com.larkea.boot.core.result.Result;
 import com.larkea.boot.core.result.SystemResultCode;
-
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -42,71 +41,69 @@ import org.springframework.web.context.request.WebRequest;
 @Slf4j
 public class LarkeaBootErrorAttributes extends DefaultErrorAttributes {
 
-	public LarkeaBootErrorAttributes() {
-		this(false);
-	}
+    public LarkeaBootErrorAttributes() {
+        this(false);
+    }
 
-	public LarkeaBootErrorAttributes(boolean includeException) {
-		super();
-	}
+    public LarkeaBootErrorAttributes(boolean includeException) {
+        super();
+    }
 
-	@Override
-	public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
+    @Override
+    public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
 
-		Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
-		String path = (String) errorAttributes.get("path");
-		Integer status = (Integer) errorAttributes.get("status");
-		String reason = (String) errorAttributes.get("error");
-		Throwable error = getError(webRequest);
+        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
+        String path = (String) errorAttributes.get("path");
+        Integer status = (Integer) errorAttributes.get("status");
+        String reason = (String) errorAttributes.get("error");
+        Throwable error = getError(webRequest);
 
-		Result<?> result;
-		if (error == null) {
-			LOGGER.error("path={},status={},reason={}", path, status, reason);
-			result = Result.failed(SystemResultCode.FAILED);
-		}
-		else if (error instanceof SystemException) {
-			LOGGER.error("path={},status={},reason={}", path, status, reason, error);
-			result = Optional.ofNullable(((SystemException) error).getResult())
-					.orElse(Result.failed(SystemResultCode.FAILED));
-		}
-		else {
-			LOGGER.error("path={},status={},reason={}", path, status, reason, error);
-			result = Result.failed(SystemResultCode.FAILED);
-		}
+        Result<?> result;
+        if (error == null) {
+            LOGGER.error("path={},status={},reason={}", path, status, reason);
+            result = Result.failed(SystemResultCode.FAILED);
+        } else if (error instanceof SystemException) {
+            LOGGER.error("path={},status={},reason={}", path, status, reason, error);
+            result = Optional.ofNullable(((SystemException) error).getResult())
+                    .orElse(Result.failed(SystemResultCode.FAILED));
+        } else {
+            LOGGER.error("path={},status={},reason={}", path, status, reason, error);
+            result = Result.failed(SystemResultCode.FAILED);
+        }
 
-		Map<String, Object> meta = Maps.newLinkedHashMap();
-		if (options.isIncluded(ErrorAttributeOptions.Include.STACK_TRACE)) {
-			meta.put("trace", errorAttributes.get("trace"));
-		}
+        Map<String, Object> meta = Maps.newLinkedHashMap();
+        if (options.isIncluded(ErrorAttributeOptions.Include.STACK_TRACE)) {
+            meta.put("trace", errorAttributes.get("trace"));
+        }
 
-		if (options.isIncluded(ErrorAttributeOptions.Include.EXCEPTION)) {
-			meta.put("exception", errorAttributes.get("exception"));
-		}
+        if (options.isIncluded(ErrorAttributeOptions.Include.EXCEPTION)) {
+            meta.put("exception", errorAttributes.get("exception"));
+        }
 
-		if (!meta.isEmpty()) {
-			result.setMeta(meta);
-		}
+        if (!meta.isEmpty()) {
+            result.setMeta(meta);
+        }
 
-		return toMap(result);
-	}
+        return toMap(result);
+    }
 
-	private Map<String, Object> toMap(Result<?> result) {
-		return toMap(result, null);
-	}
+    private Map<String, Object> toMap(Result<?> result) {
+        return toMap(result, null);
+    }
 
-	private Map<String, Object> toMap(Result<?> result, Object meta) {
-		if (result == null) {
-			return null;
-		}
+    private Map<String, Object> toMap(Result<?> result, Object meta) {
+        if (result == null) {
+            return null;
+        }
 
-		Map<String, Object> map = Maps.newLinkedHashMap();
-		map.put("success", result.isSuccess());
-		map.put("code", result.getCode());
-		map.put("message", result.getMessage());
+        Map<String, Object> map = Maps.newLinkedHashMap();
+        map.put("success", result.isSuccess());
+        map.put("code", result.getCode());
+        map.put("message", result.getMessage());
 
-		if (meta != null) {
-			map.put("meta", meta);
-		}
-		return map;
-	}
+        if (meta != null) {
+            map.put("meta", meta);
+        }
+        return map;
+    }
 }

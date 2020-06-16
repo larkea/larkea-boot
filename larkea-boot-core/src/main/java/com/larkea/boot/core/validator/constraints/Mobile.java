@@ -13,15 +13,15 @@ import com.larkea.boot.core.validator.MobileValidator;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.PARAMETER })
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Constraint(validatedBy = MobileValidator.class)
 public @interface Mobile {
 
-	String[] value() default {};
+    String[] value() default {};
 
-	String message() default "mobile value is wrong";
+    String message() default "mobile value is wrong";
 
-	Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

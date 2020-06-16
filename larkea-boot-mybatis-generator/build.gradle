@@ -1,6 +1,6 @@
 dependencies {
-	runtimeOnly("mysql:mysql-connector-java")
-	api("com.baomidou:mybatis-plus-generator:$mybatisPlusVersion")
-	api("org.springframework.boot:spring-boot-starter-freemarker")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    runtimeOnly("mysql:mysql-connector-java")
+    api("com.baomidou:mybatis-plus-generator:$mybatisPlusVersion")
+    api("org.springframework.boot:spring-boot-starter-freemarker")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

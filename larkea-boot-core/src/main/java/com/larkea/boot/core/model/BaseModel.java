@@ -1,7 +1,6 @@
 package com.larkea.boot.core.model;
 
 import com.larkea.boot.core.data.DataSupport;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -3,9 +3,6 @@ package com.larkea.boot.core.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import lombok.experimental.UtilityClass;
-
-@UtilityClass
 public class StackTraceUtil {
 
     private StackTraceUtil() {

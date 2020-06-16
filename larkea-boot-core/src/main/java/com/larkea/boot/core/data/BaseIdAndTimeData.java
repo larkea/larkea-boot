@@ -10,10 +10,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public abstract class BaseIdAndTimeData extends BaseIdData {
 
-	private final static long serialVersionUID = -8132575073846562918L;
+    private final static long serialVersionUID = -8132575073846562918L;
 
-	private LocalDateTime gmtCreated;
+    private LocalDateTime gmtCreated;
 
-	private LocalDateTime gmtUpdated;
+    private LocalDateTime gmtUpdated;
 
 }

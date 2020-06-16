@@ -21,145 +21,145 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MybatisGeneratorAutoConfiguration {
 
-	private final static String PREFIX = "larkea.boot.mybatis.generator.";
+    private final static String PREFIX = "larkea.boot.mybatis.generator.";
 
-	@Bean
-	@ConfigurationProperties(prefix = PREFIX + "global")
-	GlobalConfig globalConfig() {
-		GlobalConfig globalConfig = new GlobalConfig();
-		globalConfig.setOpen(false);
-		globalConfig.setEntityName("%sEntity");
-		globalConfig.setServiceName("%sDao");
-		globalConfig.setServiceImplName("%sDaoImpl");
-		globalConfig.setMapperName("%sMapper");
-		globalConfig.setXmlName("%sMapper");
-		globalConfig.setBaseResultMap(true);
-		globalConfig.setBaseColumnList(true);
-		globalConfig.setFileOverride(true);
-		return globalConfig;
-	}
+    @Bean
+    @ConfigurationProperties(prefix = PREFIX + "global")
+    GlobalConfig globalConfig() {
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setOpen(false);
+        globalConfig.setEntityName("%sEntity");
+        globalConfig.setServiceName("%sDao");
+        globalConfig.setServiceImplName("%sDaoImpl");
+        globalConfig.setMapperName("%sMapper");
+        globalConfig.setXmlName("%sMapper");
+        globalConfig.setBaseResultMap(true);
+        globalConfig.setBaseColumnList(true);
+        globalConfig.setFileOverride(true);
+        return globalConfig;
+    }
 
-	@Bean
-	@ConfigurationProperties(prefix = PREFIX + "data-source", ignoreInvalidFields = true)
-	DataSourceConfig dataSourceConfig() {
-		return new DataSourceConfig();
-	}
+    @Bean
+    @ConfigurationProperties(prefix = PREFIX + "data-source", ignoreInvalidFields = true)
+    DataSourceConfig dataSourceConfig() {
+        return new DataSourceConfig();
+    }
 
-	@Bean
-	@ConfigurationProperties(prefix = PREFIX + "package")
-	PackageConfig packageConfig() {
-		PackageConfig packageConfig = new PackageConfig();
-		packageConfig.setEntity("dao.entity");
-		packageConfig.setService("dao");
-		packageConfig.setServiceImpl("dao.impl");
-		packageConfig.setMapper("dao.mapper");
-		packageConfig.setXml("dao.mapper");
-		packageConfig.setController("web.controller");
-		return packageConfig;
-	}
+    @Bean
+    @ConfigurationProperties(prefix = PREFIX + "package")
+    PackageConfig packageConfig() {
+        PackageConfig packageConfig = new PackageConfig();
+        packageConfig.setEntity("dao.entity");
+        packageConfig.setService("dao");
+        packageConfig.setServiceImpl("dao.impl");
+        packageConfig.setMapper("dao.mapper");
+        packageConfig.setXml("dao.mapper");
+        packageConfig.setController("web.controller");
+        return packageConfig;
+    }
 
-	@Bean
-	InjectionConfig injectionConfig(GlobalConfig globalConfig, PackageConfig packageConfig) {
-		String outputDirPrefix = String
-				.format("%s/%s", globalConfig.getOutputDir(), packageConfig.getParent().replace('.', '/'));
-		InjectionConfig injectionConfig = new InjectionConfig() {
-			@Override
-			public void initMap() {
+    @Bean
+    InjectionConfig injectionConfig(GlobalConfig globalConfig, PackageConfig packageConfig) {
+        String outputDirPrefix = String
+                .format("%s/%s", globalConfig.getOutputDir(), packageConfig.getParent().replace('.', '/'));
+        InjectionConfig injectionConfig = new InjectionConfig() {
+            @Override
+            public void initMap() {
 
-			}
-		};
-		List<FileOutConfig> fileOutConfigList = new ArrayList<>();
-		fileOutConfigList.add(new FileOutConfig("/templates/data.java.ftl") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
-				return outputDirPrefix + "/data/"
-						+ fileName + StringPool.DOT_JAVA;
-			}
-		});
-		fileOutConfigList.add(new FileOutConfig("/templates/dataResult.java.ftl") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
-				return outputDirPrefix + "/data/"
-						+ fileName + "Result" + StringPool.DOT_JAVA;
-			}
-		});
-		fileOutConfigList.add(new FileOutConfig("/templates/dataParam.java.ftl") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
-				return outputDirPrefix + "/data/"
-						+ fileName + "Param" + StringPool.DOT_JAVA;
-			}
-		});
-		fileOutConfigList.add(new FileOutConfig("/templates/service.java.ftl") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
-				return outputDirPrefix + "/service/"
-						+ String.format("%sService", fileName) + StringPool.DOT_JAVA;
-			}
-		});
-		fileOutConfigList.add(new FileOutConfig("/templates/serviceImpl.java.ftl") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
-				return outputDirPrefix + "/service/impl/"
-						+ String.format("%sServiceImpl", fileName) + StringPool.DOT_JAVA;
-			}
-		});
-		injectionConfig.setFileOutConfigList(fileOutConfigList);
-		return injectionConfig;
-	}
+            }
+        };
+        List<FileOutConfig> fileOutConfigList = new ArrayList<>();
+        fileOutConfigList.add(new FileOutConfig("/templates/data.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
+                return outputDirPrefix + "/data/"
+                        + fileName + StringPool.DOT_JAVA;
+            }
+        });
+        fileOutConfigList.add(new FileOutConfig("/templates/dataResult.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
+                return outputDirPrefix + "/data/"
+                        + fileName + "Result" + StringPool.DOT_JAVA;
+            }
+        });
+        fileOutConfigList.add(new FileOutConfig("/templates/dataParam.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
+                return outputDirPrefix + "/data/"
+                        + fileName + "Param" + StringPool.DOT_JAVA;
+            }
+        });
+        fileOutConfigList.add(new FileOutConfig("/templates/service.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
+                return outputDirPrefix + "/service/"
+                        + String.format("%sService", fileName) + StringPool.DOT_JAVA;
+            }
+        });
+        fileOutConfigList.add(new FileOutConfig("/templates/serviceImpl.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
+                return outputDirPrefix + "/service/impl/"
+                        + String.format("%sServiceImpl", fileName) + StringPool.DOT_JAVA;
+            }
+        });
+        injectionConfig.setFileOutConfigList(fileOutConfigList);
+        return injectionConfig;
+    }
 
-	@Bean
-	@ConfigurationProperties(prefix = PREFIX + "template")
-	TemplateConfig templateConfig() {
-		return new TemplateConfig()
-				.setService("templates/dao.java")
-				.setServiceImpl("templates/daoImpl.java");
-	}
+    @Bean
+    @ConfigurationProperties(prefix = PREFIX + "template")
+    TemplateConfig templateConfig() {
+        return new TemplateConfig()
+                .setService("templates/dao.java")
+                .setServiceImpl("templates/daoImpl.java");
+    }
 
-	@Bean
-	@ConfigurationProperties(prefix = PREFIX + "strategy")
-	StrategyConfig strategyConfig() {
-		StrategyConfig strategyConfig = new StrategyConfig();
-		strategyConfig.setRestControllerStyle(true);
-		strategyConfig.setNaming(NamingStrategy.underline_to_camel);
-		strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
-		strategyConfig.setSuperEntityClass("com.larkea.boot.mybatis.BaseEntity");
-		strategyConfig.setEntityLombokModel(true);
-		strategyConfig.setSuperControllerClass("com.larkea.boot.boot.controller.Controller");
-		strategyConfig.setSuperServiceClass("com.larkea.boot.mybatis.Dao");
-		strategyConfig.setSuperServiceImplClass("com.larkea.boot.mybatis.DaoImpl");
-		strategyConfig.setLogicDeleteFieldName("gmt_deleted");
-		strategyConfig.setSuperEntityColumns("gmt_created", "gmt_updated");
-		strategyConfig.setControllerMappingHyphenStyle(true);
-		strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
-		return strategyConfig;
-	}
+    @Bean
+    @ConfigurationProperties(prefix = PREFIX + "strategy")
+    StrategyConfig strategyConfig() {
+        StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig.setRestControllerStyle(true);
+        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
+        strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategyConfig.setSuperEntityClass("com.larkea.boot.mybatis.BaseEntity");
+        strategyConfig.setEntityLombokModel(true);
+        strategyConfig.setSuperControllerClass("com.larkea.boot.boot.controller.Controller");
+        strategyConfig.setSuperServiceClass("com.larkea.boot.mybatis.Dao");
+        strategyConfig.setSuperServiceImplClass("com.larkea.boot.mybatis.DaoImpl");
+        strategyConfig.setLogicDeleteFieldName("gmt_deleted");
+        strategyConfig.setSuperEntityColumns("gmt_created", "gmt_updated");
+        strategyConfig.setControllerMappingHyphenStyle(true);
+        strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
+        return strategyConfig;
+    }
 
-	@Bean
-	MybatisGeneratorTemplateEngine templateEngine(PackageConfig packageConfig) {
-		return new MybatisGeneratorTemplateEngine(packageConfig);
-	}
+    @Bean
+    MybatisGeneratorTemplateEngine templateEngine(PackageConfig packageConfig) {
+        return new MybatisGeneratorTemplateEngine(packageConfig);
+    }
 
-	@Bean
-	AutoGenerator autoGenerator(GlobalConfig globalConfig,
-			DataSourceConfig dataSourceConfig, PackageConfig packageConfig,
-			InjectionConfig injectionConfig,
-			StrategyConfig strategyConfig, TemplateConfig templateConfig,
-			MybatisGeneratorTemplateEngine templateEngine) {
-		AutoGenerator generator = new AutoGenerator();
-		generator.setGlobalConfig(globalConfig);
-		generator.setDataSource(dataSourceConfig);
-		generator.setPackageInfo(packageConfig);
-		generator.setCfg(injectionConfig);
-		generator.setStrategy(strategyConfig);
-		generator.setTemplate(templateConfig);
-		generator.setTemplateEngine(templateEngine);
-		return generator;
-	}
+    @Bean
+    AutoGenerator autoGenerator(GlobalConfig globalConfig,
+                                DataSourceConfig dataSourceConfig, PackageConfig packageConfig,
+                                InjectionConfig injectionConfig,
+                                StrategyConfig strategyConfig, TemplateConfig templateConfig,
+                                MybatisGeneratorTemplateEngine templateEngine) {
+        AutoGenerator generator = new AutoGenerator();
+        generator.setGlobalConfig(globalConfig);
+        generator.setDataSource(dataSourceConfig);
+        generator.setPackageInfo(packageConfig);
+        generator.setCfg(injectionConfig);
+        generator.setStrategy(strategyConfig);
+        generator.setTemplate(templateConfig);
+        generator.setTemplateEngine(templateEngine);
+        return generator;
+    }
 
 }

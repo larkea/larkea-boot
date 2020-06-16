@@ -1,33 +1,33 @@
 publishing {
-	repositories {
-		maven {
-			url = System.getenv('REPOSITORY_URL') ?: REPOSITORY_URL
-		}
-	}
-	publications {
-		mavenJava(MavenPublication) {
-			pom {
-				name = POM_NAME
-				description = POM_DESCRIPTION
-				url = GIT_URL
-				scm {
-					connection = GIT_SCM_CONNECTION
-					developerConnection = GIT_SCM_CONNECTION
-					url = GIT_URL
-				}
-				licenses {
-					license {
-						name = LICENSE_NAME
-						url = LICENSE_URL
-					}
-				}
-				developers {
-					developer {
-						name = DEVELOPER_NAME
-						email = DEVELOPER_EMAIL
-					}
-				}
-			}
-		}
-	}
+    repositories {
+        maven {
+            url = System.getenv('REPOSITORY_URL') ?: REPOSITORY_URL
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                name = POM_NAME
+                description = POM_DESCRIPTION
+                url = GIT_URL
+                scm {
+                    connection = GIT_SCM_CONNECTION
+                    developerConnection = GIT_SCM_CONNECTION
+                    url = GIT_URL
+                }
+                licenses {
+                    license {
+                        name = LICENSE_NAME
+                        url = LICENSE_URL
+                    }
+                }
+                developers {
+                    developer {
+                        name = DEVELOPER_NAME
+                        email = DEVELOPER_EMAIL
+                    }
+                }
+            }
+        }
+    }
 }

@@ -7,13 +7,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.test.context.SpringBootTest;
 
 @EnableConfigurationProperties
-@SpringBootTest(classes = { MybatisGeneratorAutoConfiguration.class })
+@SpringBootTest(classes = {MybatisGeneratorAutoConfiguration.class})
 class MybatisGeneratorAutoConfigurationTest {
-	@Autowired
-	private AutoGenerator autoGenerator;
+    @Autowired
+    private AutoGenerator autoGenerator;
 
-	@Test
-	void autoGenerator() {
-		autoGenerator.execute();
-	}
+    @Test
+    void autoGenerator() {
+        autoGenerator.execute();
+    }
 }

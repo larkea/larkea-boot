@@ -13,22 +13,22 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ValidationResult {
 
-	@ApiModelProperty("Class Name")
+    @ApiModelProperty("Class Name")
     @JsonIgnore
-	private String object;
+    private String object;
 
-	@ApiModelProperty("filed name")
-	private String field;
+    @ApiModelProperty("filed name")
+    private String field;
 
-	@ApiModelProperty("reject value")
-	private Object rejectedValue;
+    @ApiModelProperty("reject value")
+    private Object rejectedValue;
 
-	@ApiModelProperty("validation message")
-	private String message;
+    @ApiModelProperty("validation message")
+    private String message;
 
-	public ValidationResult(String object, String message) {
-		this.object = object;
-		this.message = message;
-	}
+    public ValidationResult(String object, String message) {
+        this.object = object;
+        this.message = message;
+    }
 
 }

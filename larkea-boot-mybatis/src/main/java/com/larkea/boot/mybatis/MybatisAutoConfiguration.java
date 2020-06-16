@@ -19,39 +19,39 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Mybatis Plus Auto Configuration
  */
 @Configuration(proxyBeanMethods = false)
-@Import({ MybatisMetaObjectHandler.class, MybatisProperties.class })
+@Import({MybatisMetaObjectHandler.class, MybatisProperties.class})
 @EnableTransactionManagement
 public class MybatisAutoConfiguration {
 
-	/**
-	 * Enable pagination plugin
-	 */
-	@Bean
-	@ConditionalOnMissingBean({ PaginationInterceptor.class })
-	public PaginationInterceptor paginationInterceptor() {
-		// Enable optimize for count when using left join
-		return new PaginationInterceptor().setCountSqlParser(new JsqlParserCountOptimize(true));
-	}
+    /**
+     * Enable pagination plugin
+     */
+    @Bean
+    @ConditionalOnMissingBean({PaginationInterceptor.class})
+    public PaginationInterceptor paginationInterceptor() {
+        // Enable optimize for count when using left join
+        return new PaginationInterceptor().setCountSqlParser(new JsqlParserCountOptimize(true));
+    }
 
-	/**
+    /**
      * Prevent full-table update or delete
-	 */
-	@Bean
-	@ConditionalOnMissingBean({ SqlExplainInterceptor.class })
-	public SqlExplainInterceptor sqlExplainInterceptor() {
-		SqlExplainInterceptor sqlExplainInterceptor = new SqlExplainInterceptor();
-		List<ISqlParser> sqlParserList = new ArrayList<>(1);
-		sqlParserList.add(new BlockAttackSqlParser());
-		sqlExplainInterceptor.setSqlParserList(sqlParserList);
-		return sqlExplainInterceptor;
-	}
+     */
+    @Bean
+    @ConditionalOnMissingBean({SqlExplainInterceptor.class})
+    public SqlExplainInterceptor sqlExplainInterceptor() {
+        SqlExplainInterceptor sqlExplainInterceptor = new SqlExplainInterceptor();
+        List<ISqlParser> sqlParserList = new ArrayList<>(1);
+        sqlParserList.add(new BlockAttackSqlParser());
+        sqlExplainInterceptor.setSqlParserList(sqlParserList);
+        return sqlExplainInterceptor;
+    }
 
-	/**
-	 * Enable optimistic lock
-	 */
-	@Bean
-	@ConditionalOnMissingBean({ OptimisticLockerInterceptor.class })
-	public OptimisticLockerInterceptor optimisticLockerInterceptor() {
-		return new OptimisticLockerInterceptor();
-	}
+    /**
+     * Enable optimistic lock
+     */
+    @Bean
+    @ConditionalOnMissingBean({OptimisticLockerInterceptor.class})
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
+    }
 }

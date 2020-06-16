@@ -17,12 +17,12 @@ import org.springframework.web.util.WebUtils;
 @UtilityClass
 public class WebUtil extends WebUtils {
 
-	public static HttpServletRequest getRequest() {
-		return Optional.ofNullable(RequestContextHolder.getRequestAttributes())
-				.map(x -> (ServletRequestAttributes) x)
-				.map(ServletRequestAttributes::getRequest)
-				.orElse(null);
-	}
+    public static HttpServletRequest getRequest() {
+        return Optional.ofNullable(RequestContextHolder.getRequestAttributes())
+                .map(x -> (ServletRequestAttributes) x)
+                .map(ServletRequestAttributes::getRequest)
+                .orElse(null);
+    }
 
 }
 

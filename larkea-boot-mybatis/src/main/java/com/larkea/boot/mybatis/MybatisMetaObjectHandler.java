@@ -12,19 +12,19 @@ import org.apache.ibatis.reflection.MetaObject;
  */
 public class MybatisMetaObjectHandler implements MetaObjectHandler {
 
-	private static final String FIELD_GMT_CREATED = "gmtCreated";
+    private static final String FIELD_GMT_CREATED = "gmtCreated";
 
-	private static final String FIELD_GMT_UPDATED = "gmtUpdated";
+    private static final String FIELD_GMT_UPDATED = "gmtUpdated";
 
-	@Override
-	public void insertFill(MetaObject metaObject) {
-		LocalDateTime now = LocalDateTime.now();
-		this.strictInsertFill(metaObject, FIELD_GMT_CREATED, LocalDateTime.class, now);
-		this.strictInsertFill(metaObject, FIELD_GMT_UPDATED, LocalDateTime.class, now);
-	}
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        LocalDateTime now = LocalDateTime.now();
+        this.strictInsertFill(metaObject, FIELD_GMT_CREATED, LocalDateTime.class, now);
+        this.strictInsertFill(metaObject, FIELD_GMT_UPDATED, LocalDateTime.class, now);
+    }
 
-	@Override
-	public void updateFill(MetaObject metaObject) {
-		this.strictInsertFill(metaObject, FIELD_GMT_UPDATED, LocalDateTime.class, LocalDateTime.now());
-	}
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        this.strictInsertFill(metaObject, FIELD_GMT_UPDATED, LocalDateTime.class, LocalDateTime.now());
+    }
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public abstract class BaseLogicDeletableEntity<T> extends BaseEntity<T> {
 
-	@TableLogic
-	private LocalDateTime gmtDeleted;
+    @TableLogic
+    private LocalDateTime gmtDeleted;
 
 }
