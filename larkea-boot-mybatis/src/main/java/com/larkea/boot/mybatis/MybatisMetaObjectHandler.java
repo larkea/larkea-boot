@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 
 /**
- * 自动填充.
+ * Auto-filling.
  * <p>
- * 实现数据库插入更新操作自动填充更新时间gmt_created, gmt_updated 字段
+ * Update gmt_created, gmt_updated when insert/update data
  */
 public class MybatisMetaObjectHandler implements MetaObjectHandler {
 

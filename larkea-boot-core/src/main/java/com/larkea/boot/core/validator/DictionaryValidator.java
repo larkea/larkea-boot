@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 import com.larkea.boot.core.validator.constraints.Dictionary;
 
 /**
- * 检查值是否在字典中
+ * To check value whether in dict or not
  */
 public class DictionaryValidator implements ConstraintValidator<Dictionary, Integer> {
 

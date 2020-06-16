@@ -24,10 +24,9 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
 /**
- * 自定义枚举属性转换器
+ * Custom Enum Type Handler for larkea-core
  * <p>
- * Copied for mybatis-plus. 使用 larkea-core 模块中定义的接口和注解， 使得 dto/bo/vo 等不用依赖 MybatisPlus-Core
- *
+ * Copied from mybatis-plus to use the code in larkea-core without adding MybatisPlus-Core dependency.
  * @author wangle
  * @since 2019-12-26
  */
@@ -35,11 +34,11 @@ public class MybatisEnumTypeHandler<E extends Enum<?>> extends BaseTypeHandler<E
 
 	private static final Map<String, String> TABLE_METHOD_OF_ENUM_TYPES = new ConcurrentHashMap<>();
 
-	private static ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
+	private final static ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
 
 	private final Class<E> type;
 
-	private Invoker invoker;
+	private final Invoker invoker;
 
 	public MybatisEnumTypeHandler(Class<E> type) {
 		if (type == null) {
@@ -106,14 +105,6 @@ public class MybatisEnumTypeHandler<E extends Enum<?>> extends BaseTypeHandler<E
 		return Arrays.stream(es).filter((e) -> equalsValue(value, getValue(e))).findAny().orElse(null);
 	}
 
-	/**
-	 * 值比较
-	 *
-	 * @param sourceValue 数据库字段值
-	 * @param targetValue 当前枚举属性值
-	 * @return 是否匹配
-	 * @since 3.3.0
-	 */
 	protected boolean equalsValue(Object sourceValue, Object targetValue) {
 		if (sourceValue instanceof Number && targetValue instanceof Number
 				&& new BigDecimal(String.valueOf(sourceValue))

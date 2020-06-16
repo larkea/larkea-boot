@@ -11,21 +11,21 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
-@ApiModel(description = "通用树形选择器结构")
+@ApiModel(description = "Tree select data structure")
 @Data
 @Accessors(chain = true)
 public class SelectData {
 
-	@ApiModelProperty(value = "节点键，树内唯一")
+	@ApiModelProperty(value = "key of node, must be unique in a tree")
 	private String key;
 
-	@ApiModelProperty(value = "父节点键")
+	@ApiModelProperty(value = "key of parent node")
 	private String parentKey;
 
-	@ApiModelProperty(value = "节点值")
+	@ApiModelProperty(value = "value of node")
 	private String value;
 
-	@ApiModelProperty(value = "节点标签/标题")
+	@ApiModelProperty(value = "name of node")
 	private String label;
 
 	public SelectData() {
@@ -47,14 +47,14 @@ public class SelectData {
 	}
 
 	/**
-	 * 构造树形结构通用方法.
+	 * Build a tree data structure for a one-d collection.
 	 *
-	 * @param collection     待构造的数组元素
-	 * @param keyExtractor   数据的键值
-	 * @param valueExtractor 数据本身
-	 * @param labelExtractor 标题
-	 * @param <T>            通用类型
-	 * @return 构建的数据结构数据
+	 * @param collection     a one-d collection with data
+	 * @param keyExtractor   key extractor
+	 * @param valueExtractor value extractor
+	 * @param labelExtractor name extractor
+	 * @param <T>            Data type
+	 * @return Tree data
 	 */
 	public static <T> TreeData<SelectData> build(@NonNull Collection<T> collection,
 			@NonNull Function<T, String> keyExtractor,
@@ -75,15 +75,15 @@ public class SelectData {
 				.build(selectDataList, SelectData::getKey, TreeData::new, SelectData::getParentKey);
 	}
 
-	/**
-	 * 构造树形结构通用方法.
-	 *
-	 * @param collection     待构造的数组元素
-	 * @param keyExtractor   数据的键值
-	 * @param labelExtractor 标题
-	 * @param <T>            通用类型
-	 * @return 构建的数据结构数据
-	 */
+    /**
+     * Build a tree data structure for a one-d collection.
+     *
+     * @param collection     a one-d collection with data
+     * @param keyExtractor   key extractor
+     * @param labelExtractor name extractor
+     * @param <T>            Data type
+     * @return Tree data
+     */
 	public static <T> TreeData<SelectData> build(Collection<T> collection,
 			Function<T, String> keyExtractor,
 			Function<T, String> parentKeyExtractor,

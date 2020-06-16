@@ -10,20 +10,18 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 分页结构.
+ * Page data structure.
  *
- * @param <T> 分页数组中的数据项类型
+ * @param <T> the generic type in page array.
  */
 @Data
-@ApiModel(description = "分页")
+@ApiModel(description = "Page")
 public class Page<T> implements BaseData {
 
-	// 总记录数　
-	@ApiModelProperty(value = "总记录数", required = true)
+	@ApiModelProperty(value = "Total records", required = true)
 	private Long total;
 
-	// 当前内容
-	@ApiModelProperty(value = "当前记录", required = true)
+	@ApiModelProperty(value = "Current items", required = true)
 	private List<T> rows;
 
 	public Page() {

@@ -7,21 +7,17 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.experimental.UtilityClass;
 
-/**
- * MyBatis Plus 工具
- */
-@UtilityClass
 public class PageUtil {
 
 	private static final int DEFAULT_OFFSET = 0;
 
 	private static final int DEFAULT_LIMIT = 10;
 
-	/**
-	 * 转化成 MyBatis Plus 中的分页对象 Page 默认返回第一页十条数据
-	 *
-	 * @param param 查询参数
-	 * @return 分页对象
+    private PageUtil() {
+    }
+
+    /**
+     * Convert page query parameter to MyBatis Plus Page object
 	 */
 	public static <T> IPage<T> getPage(PageQueryParam param) {
 		int offset = (null == param.getOffset() || param.getOffset() < 0 ? DEFAULT_OFFSET

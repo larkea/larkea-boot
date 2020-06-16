@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import com.larkea.boot.core.validator.constraints.Mobile;
 
 /**
- * 检查手机号码格式是否正确
+ * Check China mobile format
  */
 public class MobileValidator implements ConstraintValidator<Mobile, String> {
 

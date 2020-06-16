@@ -30,7 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
 /**
- * Swagger 配置
+ * Swagger
  */
 @Configuration
 @EnableSwagger2

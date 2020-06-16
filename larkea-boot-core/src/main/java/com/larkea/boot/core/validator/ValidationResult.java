@@ -1,5 +1,6 @@
 package com.larkea.boot.core.validator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,16 +13,17 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ValidationResult {
 
-	@ApiModelProperty("对象")
+	@ApiModelProperty("Class Name")
+    @JsonIgnore
 	private String object;
 
-	@ApiModelProperty("字段")
+	@ApiModelProperty("filed name")
 	private String field;
 
-	@ApiModelProperty("非法值")
+	@ApiModelProperty("reject value")
 	private Object rejectedValue;
 
-	@ApiModelProperty("验证消息")
+	@ApiModelProperty("validation message")
 	private String message;
 
 	public ValidationResult(String object, String message) {

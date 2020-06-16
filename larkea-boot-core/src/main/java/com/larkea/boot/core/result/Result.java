@@ -12,25 +12,25 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
 
-@ApiModel(description = "返回参数")
+@ApiModel(description = "General Return Object")
 @Getter
 @Setter
 @ToString
 public class Result<T> implements BaseData {
 
-	@ApiModelProperty(value = "表示是否调用成功。true表示调用成功，false表示调用失败。", required = true)
+	@ApiModelProperty(value = "The status of the api call", required = true)
 	private boolean success;
 
-	@ApiModelProperty(value = "调用失败时，返回的错误码")
+	@ApiModelProperty(value = "Error code when failed")
 	private int code;
 
-	@ApiModelProperty(value = "调用失败时，返回的出错信息")
+	@ApiModelProperty(value = "Error message when failed")
 	private String message;
 
-	@ApiModelProperty("调用成功时返回的信息")
+	@ApiModelProperty("Data when success")
 	private T data;
 
-	@ApiModelProperty("元数据, 调用失败时，可以返回更多数据")
+	@ApiModelProperty("Metadata when failed or debug")
 	private Object meta;
 
 	private Result() {
@@ -80,7 +80,7 @@ public class Result<T> implements BaseData {
 	}
 
 	/**
-	 * 返回成功
+	 * Success
 	 */
 	public static <T> Result<T> ok() {
 		return new Result<>();
@@ -91,7 +91,7 @@ public class Result<T> implements BaseData {
 	}
 
 	/**
-	 * 返回错误信息, 不改变 http 状态码
+	 * Return error without changing http status code
 	 */
 	public static <T> Result<T> failed(String message) {
 		return new Result<>(SystemResultCode.FAILED, message);
@@ -106,7 +106,7 @@ public class Result<T> implements BaseData {
 	}
 
 	/**
-	 * 错误时抛出异常
+	 * Throw exception when failed
 	 */
 	public static void throwOnFailed(Result<?> result) throws SystemException {
 		if (isFailed(result)) {
@@ -128,7 +128,7 @@ public class Result<T> implements BaseData {
 	}
 
 	/**
-	 * 直接抛出失败异常
+	 * Throw runtime exception(SystemException) directly
 	 */
 	public static void throwFailed(ResultCode resultCode) throws SystemException {
 		throw new SystemException(resultCode);
@@ -139,7 +139,7 @@ public class Result<T> implements BaseData {
 	}
 
 	/**
-	 * 构造异常, http 状态码 为 400
+	 * Craft exception and change http status code to 400
 	 */
 	public static SystemException exception(ResultCode resultCode) {
 		return new SystemException(resultCode);

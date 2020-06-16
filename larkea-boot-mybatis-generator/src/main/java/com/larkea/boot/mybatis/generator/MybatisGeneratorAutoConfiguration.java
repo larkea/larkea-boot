@@ -35,7 +35,7 @@ public class MybatisGeneratorAutoConfiguration {
 		globalConfig.setXmlName("%sMapper");
 		globalConfig.setBaseResultMap(true);
 		globalConfig.setBaseColumnList(true);
-		globalConfig.setFileOverride(true); // 覆盖
+		globalConfig.setFileOverride(true);
 		return globalConfig;
 	}
 

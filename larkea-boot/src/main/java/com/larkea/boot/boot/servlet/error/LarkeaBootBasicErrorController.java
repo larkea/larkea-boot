@@ -28,7 +28,7 @@ public class LarkeaBootBasicErrorController extends BasicErrorController {
 	@Override
 	public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> body = getErrorAttributes(request,
-				isIncludeStackTrace(request, MediaType.ALL));
+                getErrorAttributeOptions(request, MediaType.ALL));
 		HttpStatus status = getStatus(request);
 		response.setStatus(status.value());
 		MappingJackson2JsonView view = new MappingJackson2JsonView();

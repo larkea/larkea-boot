@@ -100,7 +100,7 @@ public class RequestLogAutoConfiguration {
 			requestUrl.append(StringPool.QUESTION_MARK).append(queryString);
 		}
 
-		// 构建成一条日志
+		// A line of log
 		StringBuilder requestLog = new StringBuilder();
 
 		List<Object> requestArgs = Lists.newArrayList();

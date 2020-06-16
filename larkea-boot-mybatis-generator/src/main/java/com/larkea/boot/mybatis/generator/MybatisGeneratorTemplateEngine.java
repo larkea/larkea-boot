@@ -85,7 +85,7 @@ public class MybatisGeneratorTemplateEngine extends FreemarkerTemplateEngine {
 		Map<String, String> packageMap = (Map<String, String>) objectMap.get("package");
 		packageMap.put("data", packageParent + ".data");
 
-		// Service 需要的变量
+		// for Service templates
 		packageMap.put("Service2", packageParent + ".service");
 		packageMap.put("ServiceImpl2", packageParent + ".service.impl");
 		objectMap.put("serviceName", String.format("%sService", dataClassName));

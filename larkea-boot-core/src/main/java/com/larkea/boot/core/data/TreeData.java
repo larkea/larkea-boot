@@ -15,14 +15,14 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NonNull;
 
-@ApiModel(description = "通用树形结构")
+@ApiModel(description = "Tree data structure")
 @Data
 public class TreeData<T> {
 
 	@JsonUnwrapped
 	private T data;
 
-	@ApiModelProperty(value = "子节点")
+	@ApiModelProperty(value = "Children nodes")
 	private List<TreeData<T>> children;
 
 	private TreeData() {
@@ -32,16 +32,16 @@ public class TreeData<T> {
 		this.data = data;
 	}
 
-	/**
-	 * 构造树形结构通用方法.
-	 *
-	 * @param collection  待构造的数组元素，属性结构不会改变数据元素的顺序
-	 * @param keyMapper   数据的键值
-	 * @param valueMapper 数据本身
-	 * @param <T>         通用类型
-	 * @param <K>         返回的键类型
-	 * @return 构建的数据结构数据
-	 */
+    /**
+     * Build a tree data structure for a one-d collection and keep origin order.
+     *
+     * @param collection  A one-d collection with data,
+     * @param keyMapper   Key mapper function
+     * @param valueMapper Value mapper function
+     * @param <T>         Data type of value
+     * @param <K>         Data type of key
+     * @return Tree data
+     */
 	public static <T, K> TreeData<T> build(@NonNull Collection<T> collection,
 			@NonNull Function<T, K> keyMapper,
 			@NonNull Function<T, TreeData<T>> valueMapper,
@@ -49,11 +49,11 @@ public class TreeData<T> {
 
 		TreeData<T> root = valueMapper.apply(null);
 
-		// 使用 LinkedHashMap 来保持原始的顺序
+		// Use LinkedHashMap to keep origin order in the collection
 		final Map<K, TreeData<T>> map = collection.stream()
 				.collect(Collectors.toMap(keyMapper, valueMapper, throwingMerger(), LinkedHashMap::new));
 
-		// 如果数据存在闭环, 序列化会有问题
+		// Need to check whether a circle in collection
 		map.values().forEach(treeData -> {
 			if (treeData.getData() == null) {
 				return;

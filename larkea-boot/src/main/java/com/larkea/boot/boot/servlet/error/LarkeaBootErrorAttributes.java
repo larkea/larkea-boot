@@ -9,6 +9,7 @@ import com.larkea.boot.core.result.SystemResultCode;
 
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.context.request.WebRequest;
 
 /**
- * Pete Default implementation of {@link ErrorAttributes}. Provides the following attributes
+ * Lark-Boot Default implementation of {@link ErrorAttributes}. Provides the following attributes
  * when possible:
  * <ul>
  * <li>code - The error code</li>
@@ -41,21 +42,18 @@ import org.springframework.web.context.request.WebRequest;
 @Slf4j
 public class LarkeaBootErrorAttributes extends DefaultErrorAttributes {
 
-	private boolean includeException;
-
 	public LarkeaBootErrorAttributes() {
 		this(false);
 	}
 
 	public LarkeaBootErrorAttributes(boolean includeException) {
-		super(includeException);
-		this.includeException = includeException;
+		super();
 	}
 
 	@Override
-	public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
+	public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
 
-		Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
+		Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
 		String path = (String) errorAttributes.get("path");
 		Integer status = (Integer) errorAttributes.get("status");
 		String reason = (String) errorAttributes.get("error");
@@ -77,11 +75,11 @@ public class LarkeaBootErrorAttributes extends DefaultErrorAttributes {
 		}
 
 		Map<String, Object> meta = Maps.newLinkedHashMap();
-		if (includeStackTrace) {
+		if (options.isIncluded(ErrorAttributeOptions.Include.STACK_TRACE)) {
 			meta.put("trace", errorAttributes.get("trace"));
 		}
 
-		if (includeException) {
+		if (options.isIncluded(ErrorAttributeOptions.Include.EXCEPTION)) {
 			meta.put("exception", errorAttributes.get("exception"));
 		}
 

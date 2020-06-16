@@ -8,8 +8,7 @@ import org.springframework.lang.Nullable;
 public class SystemException extends RuntimeException {
 	static final long serialVersionUID = -672253298756571471L;
 
-	@Nullable
-	private transient Result<?> result;
+	private Result<?> result;
 
 	public SystemException(Result<?> result) {
 		super(result.getMessage());

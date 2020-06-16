@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 import com.larkea.boot.core.exception.SystemException;
 import com.larkea.boot.core.result.Result;
 import com.larkea.boot.core.result.SystemResultCode;
+import com.larkea.boot.core.util.StringUtil;
 import com.larkea.boot.core.validator.ValidationResult;
 
 import com.google.common.collect.Lists;
@@ -23,6 +24,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -98,7 +100,9 @@ public class ExceptionHandlerAutoConfiguration extends ResponseEntityExceptionHa
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
 			HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status,
 			WebRequest request) {
-		Result<?> result = Result.failed(SystemResultCode.METHOD_NOT_SUPPORTED);
+	    String message = String.format("%s, Supported methods are [%s]", ex.getMessage(),
+                StringUtil.join(ex.getSupportedMethods()));
+		Result<?> result = Result.failed(SystemResultCode.METHOD_NOT_SUPPORTED, message);
 		return this.handleExceptionInternal(ex, result, headers, status, request);
 	}
 
@@ -106,7 +110,10 @@ public class ExceptionHandlerAutoConfiguration extends ResponseEntityExceptionHa
 	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(
 			HttpMediaTypeNotSupportedException ex, HttpHeaders headers, HttpStatus status,
 			WebRequest request) {
-		Result<?> result = Result.failed(SystemResultCode.MEDIA_TYPE_NOT_SUPPORTED);
+        List<MediaType> supportedMediaTypes = ex.getSupportedMediaTypes();
+        String message = String.format("%s, Supported media types are [%s]", ex.getMessage(),
+                StringUtil.join(supportedMediaTypes));
+		Result<?> result = Result.failed(SystemResultCode.MEDIA_TYPE_NOT_SUPPORTED, message);
 		return this.handleExceptionInternal(ex, result, headers, status, request);
 	}
 
