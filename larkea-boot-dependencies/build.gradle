@@ -24,9 +24,9 @@ dependencyManagement {
         // Third Party
         dependency "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
         dependency "com.baomidou:mybatis-plus-generator:$mybatisPlusVersion"
-        dependency "com.github.xiaoymin:knife4j-spring-boot-starter:${knife4jVersion}"
         dependency "com.google.code.findbugs:jsr305:${findbugsVersion}"
         dependency "com.google.guava:guava:${guavaVersion}"
+		dependency "com.larkea.swaggerui:larkea-swagger-ui:${larkeaSwaggerUiVerion}"
         dependency "com.lmax:disruptor:${disruptorVersion}"
         dependency "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
         dependency "com.squareup.okhttp3:okhttp:${okhttpVersion}"
@@ -50,5 +50,5 @@ dependencyManagement {
         dependency "org.mariuszgromada.math:MathParser.org-mXparser:${mXparserVersion}"
         dependency "org.projectlombok:lombok:${lombokVersion}"
         dependency "org.redisson:redisson:${redissonVersion}"
-    }
+	}
 }

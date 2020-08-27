@@ -15,7 +15,6 @@ ext {
     jodaTimeVersion = '2.9.9'
     jsoupVersion = "1.12.1"
     junitVersion = '5.4.2'
-    knife4jVersion = "2.0.2"
     lombokVersion = "1.18.10"
     mXparserVersion = '4.3.3'
     mybatisPlusVersion = "3.3.0"
@@ -27,6 +26,7 @@ ext {
     slf4jApiVersion = '1.7.25'
     springBootVersion = "2.3.0.RELEASE"
     swaggerVersion = "2.9.2"
+	larkeaSwaggerUiVerion = "0.0.20082701"
     validationApiVersion = "2.0.1.Final"
 }
 
