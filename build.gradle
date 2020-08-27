@@ -53,6 +53,7 @@ configure(subprojects - project(":larkea-boot-dependencies")) {
 
     repositories {
         mavenLocal()
+		maven { url "https://maven.huitong-inc.com/releases/" }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://maven.aliyun.com/repository/spring" }
         maven { url "https://maven.aliyun.com/repository/spring-plugin" }
