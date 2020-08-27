@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
-import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.google.common.base.Predicate;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +33,6 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
  */
 @Configuration
 @EnableSwagger2
-@EnableKnife4j
 @Import({SwaggerProperties.class})
 @ConditionalOnClass({Docket.class, Swagger2DocumentationConfiguration.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
@@ -82,12 +80,13 @@ public class SwaggerAutoConfiguration {
                 .orElse(appName);
         String description = Optional.ofNullable(properties.getDescription())
                 .orElse(appName);
+		Contact contact = new Contact(properties.getContactName(),
+				properties.getContactUrl(), properties.getContactEmail());
         return new ApiInfoBuilder()
                 .title(title)
                 .description(description)
                 .version(properties.getVersion())
-                .contact(new Contact(properties.getContactName(), properties.getContactUrl(),
-                        properties.getContactEmail()))
+                .contact(contact)
                 .build();
     }
 
