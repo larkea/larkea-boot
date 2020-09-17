@@ -26,7 +26,7 @@ ext {
     slf4jApiVersion = '1.7.25'
     springBootVersion = "2.3.0.RELEASE"
     swaggerVersion = "2.9.2"
-	larkeaSwaggerUiVersion = "0.0.20082801"
+	larkeaSwaggerUiVersion = "0.0.20091701"
     validationApiVersion = "2.0.1.Final"
 }
 
