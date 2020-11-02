@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 </#if>
-@ApiModel(value="${data}对象", description="${dataComment!}")
+@ApiModel(value="${dataComment}", description="${dataComment!}")
 <#if superEntityClass??>
 public class ${data} implements BaseData<#if activeRecord><${entity}></#if> {
 <#elseif activeRecord>

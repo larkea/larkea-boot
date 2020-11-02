@@ -93,7 +93,15 @@ public class MybatisGeneratorAutoConfiguration {
                         + fileName + "Param" + StringPool.DOT_JAVA;
             }
         });
-        fileOutConfigList.add(new FileOutConfig("/templates/service.java.ftl") {
+		fileOutConfigList.add(new FileOutConfig("/templates/createOrUpdateDataParam.java.ftl") {
+			@Override
+			public String outputFile(TableInfo tableInfo) {
+				String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
+				return outputDirPrefix + "/data/"
+						+ fileName + "CreateOrUpdateParam" + StringPool.DOT_JAVA;
+			}
+		});
+		fileOutConfigList.add(new FileOutConfig("/templates/service.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 String fileName = tableInfo.getEntityName().replaceAll("Entity$", "");
@@ -137,6 +145,7 @@ public class MybatisGeneratorAutoConfiguration {
         strategyConfig.setSuperEntityColumns("gmt_created", "gmt_updated");
         strategyConfig.setControllerMappingHyphenStyle(true);
         strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
+        strategyConfig.setEntitySerialVersionUID(false);
         return strategyConfig;
     }
 

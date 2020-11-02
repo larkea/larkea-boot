@@ -31,11 +31,15 @@ public class MybatisGeneratorTemplateEngine extends FreemarkerTemplateEngine {
         String dataClassName = entityClassName.replaceAll("Entity$", "");
         String dataResultClassName = dataClassName + "Result";
         String dataParamClassName = dataClassName + "Param";
+        String createOrUpdateDataParamClassName = dataClassName + "CreateOrUpdateParam";
+        String dataVarNamePluralized = TranslateUtil.pluralize(TranslateUtil.underscore(decapitalize(dataClassName)));
 
         objectMap.put("data", dataClassName);
         objectMap.put("dataResult", dataResultClassName);
         objectMap.put("dataParam", dataParamClassName);
-        objectMap.put("dataVarName", decapitalize(dataClassName));
+		objectMap.put("createOrUpdateDataParam", createOrUpdateDataParamClassName);
+		objectMap.put("dataVarName", decapitalize(dataClassName));
+		objectMap.put("dataVarNamePluralized", dataVarNamePluralized);
         objectMap.put("dataParamVarName", decapitalize(dataClassName) + "Param");
         objectMap.put("dataResultVarName", decapitalize(dataClassName) + "Result");
 
@@ -63,7 +67,8 @@ public class MybatisGeneratorTemplateEngine extends FreemarkerTemplateEngine {
         List<String> controllerImportPackages = new ArrayList<>();
         controllerImportPackages.add(String.format("%s.data.%s", packageParent, dataClassName));
         controllerImportPackages.add(String.format("%s.data.%s", packageParent, dataParamClassName));
-        controllerImportPackages.add(String.format("%s.data.%s", packageParent, dataResultClassName));
+		controllerImportPackages.add(String.format("%s.data.%s", packageParent, createOrUpdateDataParamClassName));
+		controllerImportPackages.add(String.format("%s.data.%s", packageParent, dataResultClassName));
         controllerImportPackages
                 .add(String.format("%s.service.%sService", packageParent, dataClassName));
         objectMap.put("controllerImportPackages", controllerImportPackages);

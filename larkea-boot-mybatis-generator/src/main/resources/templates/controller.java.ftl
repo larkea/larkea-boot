@@ -43,7 +43,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 </#if>
 @AllArgsConstructor
-@RequestMapping("/${dataVarName}")
+@RequestMapping("/${dataVarNamePluralized}")
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>

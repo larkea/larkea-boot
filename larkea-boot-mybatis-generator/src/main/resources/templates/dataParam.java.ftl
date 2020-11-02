@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 </#if>
-@ApiModel(value="${data}参数对象", description="${dataComment!}")
+@ApiModel(value="${dataComment}参数", description="${dataComment!}")
 <#if superEntityClass??>
 public class ${dataParam} extends BaseModel<${data}> {
 <#elseif activeRecord>
