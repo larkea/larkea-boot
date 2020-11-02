@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * ${table.comment!} Dao 实现类
+ * ${table.comment!} 数据访问对象实现类
  * </p>
  *
  * @author ${author}
