@@ -5,7 +5,7 @@ import ${superServiceClassPackage};
 
 /**
  * <p>
- * ${table.comment!} Dao 类
+ * ${table.comment!}数据访问对象类
  * </p>
  *
  * @author ${author}
