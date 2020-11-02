@@ -3,8 +3,8 @@ package ${package.Service2};
 <#list service2ImportPackages as pkg>
 import ${pkg};
 </#list>
-import Page;
-import PageQueryParam;
+import com.larkea.boot.core.data.Page;
+import com.larkea.boot.core.data.PageQueryParam;
 import java.util.List;
 /**
  * <p>

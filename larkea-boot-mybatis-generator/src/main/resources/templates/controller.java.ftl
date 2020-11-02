@@ -8,9 +8,9 @@ import ${superControllerClassPackage};
 <#list controllerImportPackages as pkg>
 import ${pkg};
 </#list>
-import Page;
-import PageQueryParam;
-import Result;
+import com.larkea.boot.core.data.Page;
+import com.larkea.boot.core.data.PageQueryParam;
+import com.larkea.boot.core.data.Result;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
