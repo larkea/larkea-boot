@@ -10,7 +10,7 @@ import ${pkg};
 </#list>
 import com.larkea.boot.core.data.Page;
 import com.larkea.boot.core.data.PageQueryParam;
-import com.larkea.boot.core.data.Result;
+import com.larkea.boot.core.result.Result;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
