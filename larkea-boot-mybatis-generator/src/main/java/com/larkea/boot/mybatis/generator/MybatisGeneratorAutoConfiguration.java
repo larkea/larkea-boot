@@ -138,7 +138,7 @@ public class MybatisGeneratorAutoConfiguration {
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setSuperEntityClass("com.larkea.boot.mybatis.BaseEntity");
         strategyConfig.setEntityLombokModel(true);
-        strategyConfig.setSuperControllerClass("com.larkea.boot.boot.controller.Controller");
+        strategyConfig.setSuperControllerClass("com.larkea.boot.boot.controller.BaseController");
         strategyConfig.setSuperServiceClass("com.larkea.boot.mybatis.Dao");
         strategyConfig.setSuperServiceImplClass("com.larkea.boot.mybatis.DaoImpl");
         strategyConfig.setLogicDeleteFieldName("gmt_deleted");

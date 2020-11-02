@@ -4,9 +4,9 @@ package ${package.ServiceImpl2};
 import ${pkg};
 </#list>
 import ${package.Service2}.${serviceName};
-import Page;
-import PageQueryParam;
-import BeanUtil;
+import com.larkea.boot.core.data.Page;
+import com.larkea.boot.core.data.PageQueryParam;
+import com.larkea.boot.core.util.BeanUtil;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
