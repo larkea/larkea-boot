@@ -61,6 +61,7 @@ public class MybatisGeneratorTemplateEngine extends FreemarkerTemplateEngine {
         objectMap.put("dataParamImportPackages", dataParamImportPackages);
 
         List<String> entityImportPackages = new ArrayList<>(tableInfo.getImportPackages());
+		entityImportPackages.add("com.baomidou.mybatisplus.annotation.TableField");
         entityImportPackages.add(String.format("%s.data.%s", packageParent, dataClassName));
         objectMap.put("entityImportPackages", entityImportPackages);
 
