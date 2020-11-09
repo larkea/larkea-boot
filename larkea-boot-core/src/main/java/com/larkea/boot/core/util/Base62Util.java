@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  * <p>
  * Source: https://github.com/opencoinage/opencoinage/blob/master/src/java/org/opencoinage/util/Base62.java
  */
-class Base62Util {
+public class Base62Util {
 
     private static final BigInteger BASE = BigInteger.valueOf(62);
     private static final String DIGITS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
