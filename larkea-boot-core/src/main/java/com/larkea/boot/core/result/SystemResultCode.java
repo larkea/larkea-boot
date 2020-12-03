@@ -31,7 +31,8 @@ public enum SystemResultCode implements ResultCode {
     DATA_CREATE_FAILED(SystemResultCode.DATA_CREATE_FAILED_CODE, "Create data failed"),
     DATA_UPDATE_FAILED(SystemResultCode.DATA_UPDATE_FAILED_CODE, "Update data failed"),
     DATA_DELETE_FAILED(SystemResultCode.DATA_DELETE_FAILED_CODE, "Delete data failed"),
-    ;
+	DATA_QUERY_FAILED(SystemResultCode.DATA_QUERY_FAILED_CODE, "Query data failed"),
+	;
 
     /**
      * General Error Code
@@ -85,7 +86,9 @@ public enum SystemResultCode implements ResultCode {
 
     public static final int DATA_DELETE_FAILED_CODE = 100104;
 
-    final int code;
+	public static final int DATA_QUERY_FAILED_CODE = 100105;
+
+	final int code;
 
     final String message;
 
