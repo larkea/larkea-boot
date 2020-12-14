@@ -3,7 +3,6 @@ package com.larkea.boot.core.data;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.larkea.boot.core.util.ArrayUtil;
 import com.larkea.boot.core.util.CollectionUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,36 +22,21 @@ public class TableAliasPageQueryParam implements QueryParam {
 	private Integer limit = 10;
 
 	@ApiModelProperty(value = "Fields for Asc")
-	private List<TableAliasField> ascFields;
+	private List<TableAliasField> ascFields = Lists.newArrayList();
 
 	@ApiModelProperty(value = "Fields for Desc")
-	private List<TableAliasField> descFields;
+	private List<TableAliasField> descFields = Lists.newArrayList();
 
 	@ApiModelProperty(value = "Query total count, Default value is true", example = "true")
 	private boolean searchCount = true;
 
-	public TableAliasPageQueryParam() {}
+	public TableAliasPageQueryParam() {
+	}
 
-	public TableAliasPageQueryParam(PageQueryParam pageQueryParam) {
-		this.offset = pageQueryParam.getOffset();
-		this.limit = pageQueryParam.getLimit();
-		this.searchCount = pageQueryParam.isSearchCount();
-
-		if (!ArrayUtil.isEmpty(pageQueryParam.getAscs())) {
-			List<TableAliasField> ascFields = Lists.newArrayList();
-			for (String field: pageQueryParam.getAscs()) {
-				ascFields.add(new TableAliasField(field));
-			}
-			this.ascFields = ascFields;
-		}
-
-		if (!ArrayUtil.isEmpty(pageQueryParam.getDescs())) {
-			List<TableAliasField> descFields = Lists.newArrayList();
-			for (String field: pageQueryParam.getDescs()) {
-				descFields.add(new TableAliasField(field));
-			}
-			this.descFields = descFields;
-		}
+	public TableAliasPageQueryParam(Integer offset, Integer limit, boolean searchCount) {
+		this.offset = offset;
+		this.limit = limit;
+		this.searchCount = searchCount;
 	}
 
 	public boolean hasAscOrDesc() {
@@ -64,6 +48,14 @@ public class TableAliasPageQueryParam implements QueryParam {
 	 */
 	public boolean hasNoAscOrDesc() {
 		return CollectionUtil.isEmpty(ascFields) && CollectionUtil.isEmpty(descFields);
+	}
+
+	public void addAsc(TableAliasField field) {
+		this.ascFields.add(field);
+	}
+
+	public void addDesc(TableAliasField field) {
+		this.descFields.add(field);
 	}
 
 }
