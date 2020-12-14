@@ -8,9 +8,13 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.larkea.boot.core.data.PageQueryParam;
+import com.larkea.boot.core.data.TableAliasField;
+import com.larkea.boot.core.data.TableAliasPageQueryParam;
 import com.larkea.boot.core.exception.SystemException;
 import com.larkea.boot.core.result.SystemResultCode;
+import com.larkea.boot.core.util.CollectionUtil;
 import com.larkea.boot.core.util.StringPool;
+import com.larkea.boot.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,7 +24,7 @@ public class PageUtil {
 
     private static final int DEFAULT_LIMIT = 10;
 
-    private static final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]+");
+    private static final Pattern PATTERN = Pattern.compile("^[A-Za-z0-9_]+$");
 
     private PageUtil() {
     }
@@ -57,6 +61,38 @@ public class PageUtil {
         return page;
     }
 
+	/**
+	 * Convert page query parameter to MyBatis Plus Page object
+	 */
+	public static <T> IPage<T> getPage(TableAliasPageQueryParam param) {
+		int offset = (null == param.getOffset() || param.getOffset() < 0 ? DEFAULT_OFFSET
+				: param.getOffset());
+		int limit = (null == param.getLimit() || param.getLimit() < 0 ? DEFAULT_LIMIT
+				: param.getLimit());
+		int current = offset / limit + 1; // Current Page
+		Page<T> page = new Page<>(current, limit);
+		page.setSearchCount(param.isSearchCount());
+		if (!CollectionUtil.isEmpty(param.getAscFields())) {
+			String[] ascs = convertOrderByColumns(param.getAscFields());
+			final int length = ascs.length;
+			if (length == 1) {
+				page.addOrder(OrderItem.asc(ascs[0]));
+			} else if (length > 1) {
+				page.addOrder(OrderItem.ascs(ascs));
+			}
+		}
+		if (!CollectionUtil.isEmpty(param.getDescFields())) {
+			String[] descs = convertOrderByColumns(param.getDescFields());
+			final int length = descs.length;
+			if (length == 1) {
+				page.addOrder(OrderItem.desc(descs[0]));
+			} else if (length > 1) {
+				page.addOrder(OrderItem.descs(descs));
+			}
+		}
+		return page;
+	}
+
     public static String[] convertOrderByColumns(String[] columns) {
     	if (columns == null) {
     		return new String[]{};
@@ -73,6 +109,30 @@ public class PageUtil {
 		}
 
     	return columnList.toArray(new String[]{});
+	}
+
+	public static String[] convertOrderByColumns(List<TableAliasField> fields) {
+		if (CollectionUtil.isEmpty(fields)) {
+			return new String[]{};
+		}
+
+		List<String> columnList = Lists.newArrayList();
+		for (TableAliasField field: fields) {
+			String column = field.getField();
+			if (!PATTERN.matcher(column).matches()) {
+				LOGGER.warn("Sql injection in order by found:{}", column);
+				throw new SystemException(SystemResultCode.DATA_QUERY_FAILED);
+			}
+
+			String tableAlias = field.getTableAlias();
+			if (StringUtil.isBlank(tableAlias)) {
+				columnList.add(String.format("`%s`", camelToSnake(column)));
+			} else {
+				columnList.add(String.format("%s.`%s`", tableAlias, camelToSnake(column)));
+			}
+		}
+
+		return columnList.toArray(new String[]{});
 	}
 
 	public static String camelToSnake(String fieldName) {
