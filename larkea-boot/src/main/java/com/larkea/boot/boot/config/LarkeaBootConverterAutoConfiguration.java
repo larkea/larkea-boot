@@ -30,6 +30,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.larkea.boot.core.util.DateUtil;
+import com.larkea.boot.core.util.StringUtil;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -55,6 +56,9 @@ public class LarkeaBootConverterAutoConfiguration {
         return new Converter<String, LocalDate>() {
             @Override
             public LocalDate convert(String source) {
+            	if (StringUtil.isBlank(source)) {
+            		return null;
+				}
                 return LocalDate.parse(source, DateTimeFormatter.ofPattern(DateUtil.PATTERN_DATE));
             }
         };
@@ -68,7 +72,10 @@ public class LarkeaBootConverterAutoConfiguration {
         return new Converter<String, LocalDateTime>() {
             @Override
             public LocalDateTime convert(String source) {
-                return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DateUtil.PATTERN_DATETIME));
+				if (StringUtil.isBlank(source)) {
+					return null;
+				}
+				return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DateUtil.PATTERN_DATETIME));
             }
         };
     }
@@ -81,7 +88,10 @@ public class LarkeaBootConverterAutoConfiguration {
         return new Converter<String, LocalTime>() {
             @Override
             public LocalTime convert(String source) {
-                return LocalTime.parse(source, DateTimeFormatter.ofPattern(DateUtil.PATTERN_TIME));
+				if (StringUtil.isBlank(source)) {
+					return null;
+				}
+				return LocalTime.parse(source, DateTimeFormatter.ofPattern(DateUtil.PATTERN_TIME));
             }
         };
     }
@@ -94,7 +104,10 @@ public class LarkeaBootConverterAutoConfiguration {
         return new Converter<String, Date>() {
             @Override
             public Date convert(String source) {
-                SimpleDateFormat format = new SimpleDateFormat(DateUtil.PATTERN_DATETIME);
+				if (StringUtil.isBlank(source)) {
+					return null;
+				}
+				SimpleDateFormat format = new SimpleDateFormat(DateUtil.PATTERN_DATETIME);
                 try {
                     return format.parse(source);
                 } catch (ParseException e) {
@@ -141,6 +154,7 @@ public class LarkeaBootConverterAutoConfiguration {
                         jsonGenerator.writeString(formattedDate);
                     }
                 });
+
                 javaTimeModule.addDeserializer(Date.class, new JsonDeserializer<Date>() {
                     @Override
                     public Date deserialize(JsonParser jsonParser,
@@ -148,8 +162,13 @@ public class LarkeaBootConverterAutoConfiguration {
                             throws IOException, JsonProcessingException {
                         SimpleDateFormat format = new SimpleDateFormat(DateUtil.PATTERN_DATETIME);
                         String date = jsonParser.getText();
-                        try {
-                            return format.parse(date);
+
+						if (StringUtil.isBlank(date)) {
+							return null;
+						}
+
+						try {
+							return format.parse(date);
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
