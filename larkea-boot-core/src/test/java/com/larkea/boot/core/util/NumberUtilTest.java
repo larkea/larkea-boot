@@ -1,12 +1,15 @@
 package com.larkea.boot.core.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.Test;
 
-class NumberUtilTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-    @org.junit.jupiter.api.Test
-    void toLong() {
+
+public class NumberUtilTest {
+
+    @Test
+    public void toLong() {
         Long lLong = 123456L;
         String sLong = "123456";
         assertEquals(lLong, NumberUtil.toLong(sLong));
