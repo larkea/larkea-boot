@@ -1,8 +1,9 @@
 package com.larkea.boot.core.util;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author cuiwentao
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AesCipherUtilTest {
 
 	@Test
-	void encryptTest() {
+	public void encryptTest() {
 		String raw = "{\"data\":null}";
 		String key = RandomUtil.randomString(RandomUtil.STRING, 6);
 		System.out.println("Raw=" + raw);

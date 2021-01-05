@@ -12,5 +12,5 @@ dependencies {
     api "javax.validation:validation-api:${validationApiVersion}"
     api "org.hibernate.validator:hibernate-validator"
 
-    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
