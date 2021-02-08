@@ -73,7 +73,14 @@ public enum SystemResultCode implements ResultCode {
 
     public static final int REQ_TIMEOUT_CODE = 100015;
 
-    /**
+    public static final int NO_PERMISSION_CODE = 100016;
+
+    public static final int ACCESS_TOKEN_INVALID = 100017;
+
+    public static final int REFRESH_TOKEN_INVALID = 100018;
+
+
+	/**
      * Data Layer Error Code
      */
     public static final int DATA_NOT_EXISTS_CODE = 100100;
