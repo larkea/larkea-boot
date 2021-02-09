@@ -24,9 +24,9 @@ public enum SystemResultCode implements ResultCode {
     REQ_TIMEOUT(SystemResultCode.REQ_TIMEOUT_CODE, "Request is timeout"),
     ACCESS_TOKEN_EXPIRED(SystemResultCode.ACCESS_TOKEN_EXPIRED_CODE, "Access token is expired"),
     REFRESH_TOKEN_EXPIRED(SystemResultCode.REFRESH_TOKEN_EXPIRED_CODE, "Refresh token is expired"),
-	ACCESS_TOKEN_INVALID(SystemResultCode.ACCESS_TOKEN_INVALID_CODE, "Access token in invalid"),
+	ACCESS_TOKEN_INVALID(SystemResultCode.ACCESS_TOKEN_INVALID_CODE, "Access token is invalid"),
 	REFRESH_TOKEN_INVALID(SystemResultCode.REFRESH_TOKEN_INVALID_CODE, "Refresh token is invalid"),
-	NO_PERMISSION(SystemResultCode.NO_PERMISSION_CODE, "no permission"),
+	NO_PERMISSION(SystemResultCode.NO_PERMISSION_CODE, "No permission"),
 
     GRANT_TYPE_ERROR(SystemResultCode.GRANT_TYPE_ERROR_CODE, "Grant type is not supported"),
     AUTHORIZATION_FAILED(SystemResultCode.AUTHORIZATION_FAILED_CODE, "Authorization failed"),
