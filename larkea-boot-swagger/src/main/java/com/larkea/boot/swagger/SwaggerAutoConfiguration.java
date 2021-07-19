@@ -31,7 +31,7 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 /**
  * Swagger
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableSwagger2
 @Import({ SwaggerProperties.class })
 @ConditionalOnClass({ Docket.class, Swagger2DocumentationConfiguration.class })

@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @ConditionalOnProperty(value = "larkea.boot.request.log", havingValue = "true")
 @RequiredArgsConstructor

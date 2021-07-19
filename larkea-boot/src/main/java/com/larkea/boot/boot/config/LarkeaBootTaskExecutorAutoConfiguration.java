@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @EnableAsync
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @Import({ LarkeaBootTaskExecutorProperties.class })
 @AllArgsConstructor
 public class LarkeaBootTaskExecutorAutoConfiguration extends AsyncConfigurerSupport {
