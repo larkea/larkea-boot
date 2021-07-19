@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.DispatcherServlet;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(ErrorMvcAutoConfiguration.class)
 @ConditionalOnClass({ Servlet.class, DispatcherServlet.class })
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)

@@ -43,7 +43,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 /**
  * Default converter for converting date string to date types in RequestParam and PathVariable.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(ObjectMapper.class)
 @AutoConfigureBefore(JacksonAutoConfiguration.class)
 public class LarkeaBootConverterAutoConfiguration {

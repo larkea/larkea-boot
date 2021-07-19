@@ -18,7 +18,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class MybatisGeneratorAutoConfiguration {
 
 	private final static String PREFIX = "larkea.boot.mybatis.generator.";

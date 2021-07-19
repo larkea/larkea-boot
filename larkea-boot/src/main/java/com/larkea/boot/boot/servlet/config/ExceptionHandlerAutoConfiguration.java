@@ -48,7 +48,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @RestControllerAdvice
 @Slf4j
