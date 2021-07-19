@@ -1,9 +1,9 @@
 ext {
 	bitwalkerUserAgentUtilsVersion = '1.21'
-	commonsCodecVersion = '1.13'
+	commonsCodecVersion = '1.14'
 	commonsCollections4Version = '4.4'
 	commonsCsvVersion = '1.7'
-	commonsLang3Version = '3.9'
+	commonsLang3Version = '3.10'
 	disruptorVersion = '3.4.2'
 	dom4jVersion = '1.6.1'
 	feignFormVersion = '3.8.0'
@@ -18,7 +18,7 @@ ext {
 	lombokVersion = "1.18.10"
 	mXparserVersion = '4.3.3'
 	mybatisPlusVersion = "3.3.0"
-	nettyVersion = "4.1.66.Final"
+	nettyVersion = "4.1.65.Final"
 	okhttpVersion = "3.14.2"
 	pahoMqttJavaVersion = '1.2.0'
 	redissonVersion = "3.11.2"
