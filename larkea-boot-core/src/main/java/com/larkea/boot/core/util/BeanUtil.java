@@ -16,45 +16,45 @@ import org.springframework.beans.BeansException;
 
 public class BeanUtil extends BeanUtils {
 
-    private BeanUtil() {
-    }
+	private BeanUtil() {
+	}
 
-    public static String[] getNullPropertyNames(Object source) {
-        final BeanWrapper src = new BeanWrapperImpl(source);
-        PropertyDescriptor[] pds = src.getPropertyDescriptors();
+	public static String[] getNullPropertyNames(Object source) {
+		final BeanWrapper src = new BeanWrapperImpl(source);
+		PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
-        Set<String> emptyNames = Sets.newHashSet();
-        for (PropertyDescriptor pd : pds) {
-            Object srcValue = src.getPropertyValue(pd.getName());
-            if (srcValue == null) {
-                emptyNames.add(pd.getName());
-            }
-        }
-        String[] result = new String[emptyNames.size()];
-        return emptyNames.toArray(result);
-    }
+		Set<String> emptyNames = Sets.newHashSet();
+		for (PropertyDescriptor pd : pds) {
+			Object srcValue = src.getPropertyValue(pd.getName());
+			if (srcValue == null) {
+				emptyNames.add(pd.getName());
+			}
+		}
+		String[] result = new String[emptyNames.size()];
+		return emptyNames.toArray(result);
+	}
 
-    public static void copyPropertiesIgnoreNull(Object source, Object target) throws BeansException {
-        String[] ignoreProperties = getNullPropertyNames(source);
-        copyProperties(source, target, ignoreProperties);
-    }
+	public static void copyPropertiesIgnoreNull(Object source, Object target) throws BeansException {
+		String[] ignoreProperties = getNullPropertyNames(source);
+		copyProperties(source, target, ignoreProperties);
+	}
 
-    public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier,
-                                          Function<S, T> converter) {
-        return sources.stream().map(source -> {
-            T target = targetSupplier.get();
-            copyProperties(source, target);
+	public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier,
+			Function<S, T> converter) {
+		return sources.stream().map(source -> {
+			T target = targetSupplier.get();
+			copyProperties(source, target);
 
-            if (Optional.ofNullable(converter).isPresent()) {
-                target = converter.apply(source);
-            }
+			if (Optional.ofNullable(converter).isPresent()) {
+				target = converter.apply(source);
+			}
 
-            return target;
-        }).collect(Collectors.toList());
-    }
+			return target;
+		}).collect(Collectors.toList());
+	}
 
-    public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier) {
-        return copyList(sources, targetSupplier, null);
-    }
+	public static <S, T> List<T> copyList(List<S> sources, Supplier<T> targetSupplier) {
+		return copyList(sources, targetSupplier, null);
+	}
 
 }

@@ -23,25 +23,25 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 @Configuration
 @AutoConfigureBefore(ErrorMvcAutoConfiguration.class)
-@ConditionalOnClass({Servlet.class, DispatcherServlet.class})
+@ConditionalOnClass({ Servlet.class, DispatcherServlet.class })
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @AllArgsConstructor
 public class LarkeaBootErrorAutoConfiguration {
 
-    private final ServerProperties serverProperties;
+	private final ServerProperties serverProperties;
 
-    private final ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
 
-    @Bean
-    @ConditionalOnMissingBean(value = ErrorAttributes.class, search = SearchStrategy.CURRENT)
-    public DefaultErrorAttributes errorAttributes() {
-        return new LarkeaBootErrorAttributes();
-    }
+	@Bean
+	@ConditionalOnMissingBean(value = ErrorAttributes.class, search = SearchStrategy.CURRENT)
+	public DefaultErrorAttributes errorAttributes() {
+		return new LarkeaBootErrorAttributes();
+	}
 
-    @Bean
-    @ConditionalOnMissingBean(value = ErrorController.class, search = SearchStrategy.CURRENT)
-    public BasicErrorController basicErrorController(ErrorAttributes errorAttributes) {
-        return new LarkeaBootBasicErrorController(objectMapper, errorAttributes, serverProperties.getError());
-    }
+	@Bean
+	@ConditionalOnMissingBean(value = ErrorController.class, search = SearchStrategy.CURRENT)
+	public BasicErrorController basicErrorController(ErrorAttributes errorAttributes) {
+		return new LarkeaBootBasicErrorController(objectMapper, errorAttributes, serverProperties.getError());
+	}
 
 }

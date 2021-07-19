@@ -7,12 +7,12 @@ package com.larkea.boot.core.data;
  */
 public interface FromData<T> {
 
-    /**
-     * Convert DTO to other
-     *
-     * @param data dto
-     * @param <R>  return type
-     * @return other object
-     */
-    <R> R fromData(T data);
+	/**
+	 * Convert DTO to other
+	 *
+	 * @param data dto
+	 * @param <R>  return type
+	 * @return other object
+	 */
+	<R> R fromData(T data);
 }

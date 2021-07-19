@@ -13,10 +13,10 @@ import lombok.Setter;
 @Setter
 public abstract class BaseEntity<T> extends DataSupport<T> implements Serializable {
 
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime gmtCreated;
+	@TableField(fill = FieldFill.INSERT)
+	private LocalDateTime gmtCreated;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime gmtUpdated;
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private LocalDateTime gmtUpdated;
 
 }

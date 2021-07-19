@@ -1,8 +1,8 @@
 apply plugin: "pmd"
 
 pmd {
-    sourceSets = [sourceSets.main]
-    ignoreFailures = true
-    reportsDir = file("$project.buildDir/pmdReports")
+	sourceSets = [sourceSets.main]
+	ignoreFailures = true
+	reportsDir = file("$project.buildDir/pmdReports")
 }
 

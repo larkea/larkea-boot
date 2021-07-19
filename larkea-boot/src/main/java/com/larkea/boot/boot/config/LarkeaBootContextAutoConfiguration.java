@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LarkeaBootContextAutoConfiguration {
 
-    @Bean
-    SpringContextHolder springContextHolder() {
-        return new SpringContextHolder();
-    }
+	@Bean
+	SpringContextHolder springContextHolder() {
+		return new SpringContextHolder();
+	}
 }

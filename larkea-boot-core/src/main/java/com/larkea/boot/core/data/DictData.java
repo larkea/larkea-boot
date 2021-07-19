@@ -7,10 +7,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DictData implements BaseData {
 
-    private final static long serialVersionUID = 2702186935367698988L;
+	private final static long serialVersionUID = 2702186935367698988L;
 
-    private Object value;
+	private Object value;
 
-    private String description;
+	private String description;
 
 }

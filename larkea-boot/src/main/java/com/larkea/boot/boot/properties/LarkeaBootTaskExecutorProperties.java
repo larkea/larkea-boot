@@ -12,11 +12,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("larkea.boot.task-executor")
 public class LarkeaBootTaskExecutorProperties {
 
-    private int corePoolSize = 4;
+	private int corePoolSize = 4;
 
-    private int maxPoolSize = 100;
+	private int maxPoolSize = 100;
 
-    private int queueCapacity = 20000;
+	private int queueCapacity = 20000;
 
-    private int keepAliveSeconds = 300;
+	private int keepAliveSeconds = 300;
 }

@@ -16,28 +16,28 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @EnableAsync
 @Configuration
-@Import({LarkeaBootTaskExecutorProperties.class})
+@Import({ LarkeaBootTaskExecutorProperties.class })
 @AllArgsConstructor
 public class LarkeaBootTaskExecutorAutoConfiguration extends AsyncConfigurerSupport {
 
-    private final LarkeaBootTaskExecutorProperties properties;
+	private final LarkeaBootTaskExecutorProperties properties;
 
-    @Override
-    @Bean(name = "larkeaBootTaskExecutor")
-    public Executor getAsyncExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(properties.getCorePoolSize());
-        executor.setMaxPoolSize(properties.getMaxPoolSize());
-        executor.setQueueCapacity(properties.getQueueCapacity());
-        executor.setKeepAliveSeconds(properties.getKeepAliveSeconds());
-        executor.setThreadNamePrefix("larkea-boot-task-executor-");
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        return executor;
-    }
+	@Override
+	@Bean(name = "larkeaBootTaskExecutor")
+	public Executor getAsyncExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(properties.getCorePoolSize());
+		executor.setMaxPoolSize(properties.getMaxPoolSize());
+		executor.setQueueCapacity(properties.getQueueCapacity());
+		executor.setKeepAliveSeconds(properties.getKeepAliveSeconds());
+		executor.setThreadNamePrefix("larkea-boot-task-executor-");
+		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		return executor;
+	}
 
-    @Override
-    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return new SimpleAsyncUncaughtExceptionHandler();
-    }
+	@Override
+	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+		return new SimpleAsyncUncaughtExceptionHandler();
+	}
 
 }
