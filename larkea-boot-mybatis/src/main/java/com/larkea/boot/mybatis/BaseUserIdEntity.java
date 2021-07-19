@@ -18,10 +18,10 @@ import lombok.Setter;
 @Setter
 public abstract class BaseUserIdEntity<T> extends BaseEntity<T> {
 
-    @TableField(fill = FieldFill.INSERT)
-    private Long userIdCreated;
+	@TableField(fill = FieldFill.INSERT)
+	private Long userIdCreated;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long userIdUpdated;
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Long userIdUpdated;
 
 }

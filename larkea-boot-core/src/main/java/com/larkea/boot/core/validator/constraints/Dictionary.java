@@ -13,15 +13,15 @@ import com.larkea.boot.core.validator.DictionaryValidator;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Constraint(validatedBy = DictionaryValidator.class)
 public @interface Dictionary {
 
-    String[] value() default {};
+	String[] value() default {};
 
-    String message() default "dict value is not found";
+	String message() default "dict value is not found";
 
-    Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 }

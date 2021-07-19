@@ -4,8 +4,8 @@ import com.larkea.boot.core.data.BaseData;
 
 public interface ResultCode extends BaseData {
 
-    int getCode();
+	int getCode();
 
-    String getMessage();
+	String getMessage();
 
 }

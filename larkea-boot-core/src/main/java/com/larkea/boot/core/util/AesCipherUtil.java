@@ -38,7 +38,8 @@ public class AesCipherUtil {
 			System.arraycopy(iv, 0, data, 0, iv.length);
 			System.arraycopy(encrypted, 0, data, iv.length, encrypted.length);
 			return Base64.getEncoder().encode(data);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return null;
 		}
 	}
@@ -61,7 +62,8 @@ public class AesCipherUtil {
 			IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
 			cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParameterSpec);
 			return cipher.doFinal(encrypted);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return null;
 		}
 	}

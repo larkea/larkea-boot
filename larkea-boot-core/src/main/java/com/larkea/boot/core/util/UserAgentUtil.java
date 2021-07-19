@@ -8,24 +8,25 @@ import org.apache.commons.lang3.StringUtils;
 
 public class UserAgentUtil {
 
-    private final static String USER_AGENT = "User-Agent";
-    private final static String X_USER_AGENT = "X-User-Agent";
+	private final static String USER_AGENT = "User-Agent";
 
-    private UserAgentUtil() {
-    }
+	private final static String X_USER_AGENT = "X-User-Agent";
 
-    public static UserAgent getUserAgent(HttpServletRequest request) {
-        String userAgentText = request.getHeader(USER_AGENT);
-        if (StringUtils.isEmpty(userAgentText)) {
-            userAgentText = request.getHeader(X_USER_AGENT);
-        }
+	private UserAgentUtil() {
+	}
 
-        UserAgent userAgent = UserAgent.parseUserAgentString(userAgentText);
-        return userAgent;
-    }
+	public static UserAgent getUserAgent(HttpServletRequest request) {
+		String userAgentText = request.getHeader(USER_AGENT);
+		if (StringUtils.isEmpty(userAgentText)) {
+			userAgentText = request.getHeader(X_USER_AGENT);
+		}
 
-    public static String getUserAgentAsString(HttpServletRequest request) {
-        UserAgent userAgent = getUserAgent(request);
-        return userAgent.toString();
-    }
+		UserAgent userAgent = UserAgent.parseUserAgentString(userAgentText);
+		return userAgent;
+	}
+
+	public static String getUserAgentAsString(HttpServletRequest request) {
+		UserAgent userAgent = getUserAgent(request);
+		return userAgent.toString();
+	}
 }

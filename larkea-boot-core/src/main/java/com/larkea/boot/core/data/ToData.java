@@ -7,5 +7,5 @@ package com.larkea.boot.core.data;
  */
 public interface ToData<T> {
 
-    T toData();
+	T toData();
 }

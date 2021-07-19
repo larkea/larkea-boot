@@ -3,10 +3,10 @@ package com.larkea.boot.core.util;
 import org.apache.commons.lang3.StringUtils;
 
 public class StringUtil extends StringUtils {
-    private StringUtil() {
-    }
+	private StringUtil() {
+	}
 
-    public static boolean timeConstantEquals(String s1, String s2) {
+	public static boolean timeConstantEquals(String s1, String s2) {
 		if (s1 == s2) {
 			return true;
 		}
